@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using CrashBoard.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrashBoard
 {
@@ -26,6 +28,11 @@ namespace CrashBoard
         {
             services.AddControllersWithViews();
 
+            services.AddDbContext<CrashDbContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+            });
+
             // Added this to enable cookies
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -35,6 +42,7 @@ namespace CrashBoard
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddScoped<ICrashRepository, EFCrashRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

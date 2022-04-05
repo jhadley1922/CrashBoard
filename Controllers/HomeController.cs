@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CrashBoard.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,25 +11,22 @@ namespace CrashBoard.Controllers
 {
     public class HomeController : Controller
     {
+        private ICrashRepository repo { get; set; }
 
-        public HomeController()
+        public HomeController(ICrashRepository temp)
         {
+            repo = temp;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var cities = repo.Crashes.Take(10).ToList();
+            return View(cities);
         }
 
         public IActionResult CrashData()
         {
             return View();
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
     }
 }

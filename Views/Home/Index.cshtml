@@ -2,7 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model List<CrashBoard.Models.Crash>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Describe background, site information and its uses</p>
 </div>
+
+<ul>
+    @foreach(CrashBoard.Models.Crash crash in Model)
+    {
+        <li>@crash.MILEPOINT.ToString()</li>
+    }
+</ul>
