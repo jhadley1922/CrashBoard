@@ -1,5 +1,6 @@
 ﻿using CrashBoard.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,13 +21,18 @@ namespace CrashBoard.Controllers
 
         public IActionResult Index()
         {
-            var cities = repo.Crashes.Take(10).ToList();
-            return View(cities);
+            return View();
         }
 
         public IActionResult CrashData()
         {
-            return View();
+            var crashes = repo.Crashes
+                .Include(x => x.CITY)
+                .Include(x => x.COUNTY)
+                .Include(x => x.SEVERITY)
+                .Take(100)
+                .ToList();
+            return View(crashes);
         }
 
         public IActionResult Privacy()
