@@ -4,7 +4,7 @@
 @model List<CrashBoard.Models.County>
 
 <div class="container">
-    <a asp-controller="Home" asp-action="CrashData" asp-route-county="0" asp-route-pageNum="1" class="btn btn-outline-primary btn-block">Home</a>
+    <a asp-controller="Home" asp-action="CrashData" asp-route-county="0" asp-route-pageNum="1" class="btn @(ViewBag.SelectedCounty == "0" ? "btn-primary" : "btn-outline-primary") btn-block">Home</a>
 
     @foreach(County c in Model)
     {
