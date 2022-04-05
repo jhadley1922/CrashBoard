@@ -2,4 +2,32 @@
     ViewData["Title"] = "Crash Details";
 }
 
-<p>THIS PAGE LISTS OUT CRASH DATA</p>
+@model List<Crash>
+
+<table class="table table-sm table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date and Time</th>
+            <th>Route</th>
+            <th>Road</th>
+            <th>City</th>
+            <th>County</th>
+            <th>Severity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Crash c in Model)
+        {
+            <tr>
+                <td>@c.CRASH_ID</td>
+                <td>@c.CRASH_DATETIME</td>
+                <td>@c.ROUTE</td>
+                <td>@c.MAIN_ROAD_NAME</td>
+                <td>@c.CITY.CITY_NAME</td>
+                <td>@c.COUNTY.COUNTY_NAME</td>
+                <td>@c.SEVERITY.SEVERITY_DESCRIPTION</td>
+            </tr>
+        }
+    </tbody>
+</table>
