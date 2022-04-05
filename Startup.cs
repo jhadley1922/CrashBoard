@@ -71,6 +71,11 @@ namespace CrashBoard
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "CrashData/{pageNum}",
+                    defaults: new { Controller = "Home", action = "CrashData" });
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });

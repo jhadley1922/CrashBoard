@@ -1,4 +1,5 @@
 ﻿using CrashBoard.Models;
+using CrashBoard.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,15 +25,24 @@ namespace CrashBoard.Controllers
             return View();
         }
 
-        public IActionResult CrashData()
+        public IActionResult CrashData(int pageNum)
         {
-            var crashes = repo.Crashes
-                .Include(x => x.CITY)
-                .Include(x => x.COUNTY)
-                .Include(x => x.SEVERITY)
-                .Take(100)
-                .ToList();
-            return View(crashes);
+            int pageSize = 50;
+
+            ViewBag.PageNum = pageNum;
+            ViewBag.TotalPages = (repo.Crashes.Count() / pageSize);
+
+            var cvm = new CrashesViewModel
+            {
+                Crashes = repo.Crashes
+                    .Include(x => x.CITY)
+                    .Include(x => x.COUNTY)
+                    .Include(x => x.SEVERITY)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+            };
+
+            return View(cvm);
         }
 
         public IActionResult Privacy()
