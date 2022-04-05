@@ -25,12 +25,13 @@ namespace CrashBoard.Controllers
             return View();
         }
 
-        public IActionResult CrashData(int pageNum)
+        public IActionResult CrashData(int county, int pageNum)
         {
             int pageSize = 50;
 
             ViewBag.PageNum = pageNum;
-            ViewBag.TotalPages = (repo.Crashes.Count() / pageSize);
+            ViewBag.SelectedCounty = county;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)repo.Crashes.Count() / pageSize);
 
             var cvm = new CrashesViewModel
             {
@@ -41,7 +42,20 @@ namespace CrashBoard.Controllers
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)
             };
-
+            if (county != 0)
+            {
+                cvm = new CrashesViewModel
+                {
+                    Crashes = repo.Crashes
+                        .Include(x => x.CITY)
+                        .Include(x => x.COUNTY)
+                        .Include(x => x.SEVERITY)
+                        .Where(x => x.CountyId == county)
+                        .Skip((pageNum - 1) * pageSize)
+                        .Take(pageSize)
+                };
+                ViewBag.TotalPages = (int)Math.Ceiling((double)repo.Crashes.Where(x => x.CountyId == county).Count() / pageSize);
+            }
             return View(cvm);
         }
 

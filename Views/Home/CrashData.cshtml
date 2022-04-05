@@ -2,73 +2,80 @@
     ViewData["Title"] = "Crash Details";
 }
 
-@model CrashBoard.Models.ViewModels.CrashesViewModel
+@model CrashesViewModel
 
-<table class="table table-sm table-bordered table-striped sb">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Date and Time</th>
-            <th>Route</th>
-            <th>Road</th>
-            <th>City</th>
-            <th>County</th>
-            <th>Severity</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Crash c in Model.Crashes)
-        {
-        <tr>
-            <td>@c.CRASH_ID</td>
-            <td>@c.CRASH_DATETIME</td>
-            <td>@c.ROUTE</td>
-            <td>@c.MAIN_ROAD_NAME</td>
-            @if (c.CITY != null)
-            {
-                <td>@c.CITY.CITY_NAME</td>
-            }
-            else
-            {
-                <td></td>
-            }
-            @if (c.COUNTY != null)
-            {
-                <td>@c.COUNTY.COUNTY_NAME</td>
-            }
-            else
-            {
-                <td></td>
-            }
-            @if (c.SEVERITY != null)
-            {
+    <div class="row m-1 p-1">
+        <div class="col-2">
+            <vc:counties></vc:counties>
+        </div>
+        <div class="col-10">
+            <table class="table table-sm table-bordered table-striped sb">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date and Time</th>
+                        <th>Route</th>
+                        <th>Road</th>
+                        <th>City</th>
+                        <th>County</th>
+                        <th>Severity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Crash c in Model.Crashes)
+                    {
+                        <tr>
+                            <td>@c.CRASH_ID</td>
+                            <td>@c.CRASH_DATETIME</td>
+                            <td>@c.ROUTE</td>
+                            <td>@c.MAIN_ROAD_NAME</td>
+                            @if (c.CITY != null)
+                            {
+                                <td>@c.CITY.CITY_NAME</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            @if (c.COUNTY != null)
+                            {
+                                <td>@c.COUNTY.COUNTY_NAME</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            @if (c.SEVERITY != null)
+                            {
 
-                <td>@c.SEVERITY.SEVERITY_DESCRIPTION</td>
-            }
-            else
-            {
-                <td></td>
-            }
-        </tr>
-        }
-    </tbody>
-</table>
+                                <td>@c.SEVERITY.SEVERITY_DESCRIPTION</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-<div class="text-center">
-    @if (ViewBag.PageNum <= 1)
-    {
-        <a disabled class="btn btn-secondary text-light">Back</a>
-    }
-    else
-    {
-        <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData" asp-route-pageNum="@(ViewBag.PageNum - 1)">Back</a>
-    }
-    @if (ViewBag.PageNum >= ViewBag.TotalPages)
-    {
-        <a disabled class="btn btn-secondary text-light">Next</a>
-    }
-    else
-    {
-        <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData" asp-route-pageNum="@(ViewBag.PageNum + 1)">Next</a>
-    }
-</div>
+            <div class="text-center">
+                @if (ViewBag.PageNum <= 1)
+                {
+                    <a disabled class="btn btn-secondary text-light">Back</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData" asp-route-county="@ViewBag.SelectedCounty" asp-route-pageNum="@(ViewBag.PageNum - 1)">Back</a>
+                }
+                @if (ViewBag.PageNum >= ViewBag.TotalPages)
+                {
+                    <a disabled class="btn btn-secondary text-light">Next</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData" asp-route-county="@ViewBag.SelectedCounty" asp-route-pageNum="@(ViewBag.PageNum + 1)">Next</a>
+                }
+            </div>
+        </div>
+    </div>
