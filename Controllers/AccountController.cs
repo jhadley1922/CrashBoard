@@ -104,6 +104,9 @@ namespace CrashBoard.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Cities = repo.Cities.OrderBy(x => x.CITY_NAME).ToList();
+            ViewBag.Counties = repo.Counties.OrderBy(x => x.COUNTY_NAME).ToList();
+            ViewBag.Severities = repo.Severities.ToList();
             return View();
         }
 
@@ -111,7 +114,7 @@ namespace CrashBoard.Controllers
         public IActionResult Create(Crash c)
         {
             repo.CreateCrash(c);
-            return RedirectToAction("CreateConfirm");
+            return View("CreateConfirm");
         }
     }
 }

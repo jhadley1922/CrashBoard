@@ -5,10 +5,8 @@
 @model CrashesViewModel
 
 <div class="row m-1 p-1">
-    <div class="col-2">
-        <vc:severities></vc:severities>
-    </div>
-    <div class="col-10">
+
+    <div class="">
         @using (Html.BeginForm())
         {
             <p>
@@ -71,7 +69,7 @@
         </table>
 
         <div class="text-center">
-            <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+            <a class="btn btn-primary text-light" asp-controller="Account" asp-action="Admin"
                asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="1"
                asp-route-searchString="@ViewBag.SearchString">First</a>
 
@@ -81,7 +79,7 @@
             }
             else
             {
-                <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+                <a class="btn btn-primary text-light" asp-controller="Account" asp-action="Admin"
                    asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="@(ViewBag.PageNum - 1)"
                    asp-route-searchString="@ViewBag.SearchString">Back</a>
             }
@@ -91,12 +89,12 @@
             }
             else
             {
-                <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+                <a class="btn btn-primary text-light" asp-controller="Account" asp-action="Admin"
                    asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="@(ViewBag.PageNum + 1)"
                    asp-route-searchString="@ViewBag.SearchString">Next</a>
             }
 
-            <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+            <a class="btn btn-primary text-light" asp-controller="Account" asp-action="Admin"
                asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="@ViewBag.TotalPages"
                asp-route-searchString="@ViewBag.SearchString">Last</a>
 
