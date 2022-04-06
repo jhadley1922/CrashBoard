@@ -4,25 +4,16 @@
 
 @model CrashesViewModel
 
-
-
 <div class="container">
     <!-- Header -->
-    <div class="text-center m-2">
-        <h1 class="fw-bolder">Crash Database</h1>
-        <p class="lead fw-normal text-muted mb-0">Below is a table with crash data from 2016-2020</p><br />
-    </div>
-
-    <div class="row m-1 p-1">
-
-        <!-- Side Filter -->
-        <div class="col-2 filter">
-            <p>Filter by crash severity:</p>
-            <vc:severities></vc:severities>
+    <div class="row m-1 p-1 text-center">
+        <div class="m-2">
+            <h1 class="fw-bolder">Crash Database</h1>
+            <p class="lead fw-normal text-muted mb-0">Below is a table with crash data from 2016-2019</p><br />
         </div>
 
         <!-- Search bar -->
-        <div class="col-10">
+        <div>
             @using (Html.BeginForm())
             {
                 <p>
@@ -30,18 +21,28 @@
                     <input type="submit" value="Search" class="btn btn-sm btn-search btn-primary" />
                 </p>
             }
+        </div>
+    </div>
+    
+    <div class="row m-1 p-1">
+        <!-- Side Filter -->
+        <div class="col-2 text-center">
+            <p>Filter by crash severity:</p>
+            <vc:severities></vc:severities>
+        </div>
 
-            <!-- Table -->
+        <!-- Table -->
+        <div class="col-10">
             <table class="table table-sm table-bordered table-striped sb">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Date and Time</th>
-                        <th>Route</th>
-                        <th>Road</th>
-                        <th>City</th>
-                        <th>County</th>
-                        <th>Severity</th>
+                        <th class="col-1">ID</th>
+                        <th class="col-3">Date and Time</th>
+                        <th class="col-1">Route</th>
+                        <th class="col-3">Road</th>
+                        <th class="col-1">City</th>
+                        <th class="col-1">County</th>
+                        <th class="col-2">Severity</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,6 +87,16 @@
             <div class="text-center">
                 @if (ViewBag.PageNum <= 1)
                 {
+                    <a disabled class="btn btn-secondary text-light">First</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+                       asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="1"
+                       asp-route-searchString="@ViewBag.SearchString">First</a>
+                }
+                @if (ViewBag.PageNum <= 1)
+                {
                     <a disabled class="btn btn-secondary text-light">Back</a>
                 }
                 else
@@ -104,6 +115,18 @@
                        asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="@(ViewBag.PageNum + 1)"
                        asp-route-searchString="@ViewBag.SearchString">Next</a>
                 }
+                @if (ViewBag.PageNum >= ViewBag.TotalPages)
+                {
+                    <a disabled class="btn btn-secondary text-light">Last</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+                       asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="@ViewBag.TotalPages"
+                       asp-route-searchString="@ViewBag.SearchString">Last</a>
+                    
+                }
+                <p>@ViewBag.PageNum of @ViewBag.TotalPages pages</p>
             </div>
         </div>
     </div>
