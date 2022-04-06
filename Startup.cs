@@ -93,6 +93,14 @@ namespace CrashBoard
             //app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains().Preload());
             //app.UseHsts();
             app.UseHttpsRedirection();
+
+            //content security policy (CSP) HTTP header 
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self' cdn.jsdelivr.net;");
+                await next();
+            });
+
             app.UseStaticFiles();
 
             // Added this to enable cookies
