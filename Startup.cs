@@ -68,8 +68,8 @@ namespace CrashBoard
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequiredLength = 14; //According to Microsoft, a minimum length of 14 is  best practice 
+                options.Password.RequiredUniqueChars = 5;
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
