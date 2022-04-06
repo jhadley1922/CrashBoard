@@ -13,7 +13,7 @@
     <div id="cookieConsent" class="alert fade show border-dark text-center" role="alert">
         <p>We use cookies to enhance your browsing experience. By clicking "Accept" you consent to our use of cookies.</p>
         <a class="btn btn-primary m-2" asp-controller="Home" asp-action="Privacy">View Our Privacy Policy</a>
-        <button type="button" class="btn btn-primary text-white m-2" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+        <button type="button" class="btn btn-primary text-white m-2" data-dismiss="alert" aria-label="Close" SameSite="SameSiteMode.Lax" data-cookie-string="@cookieString">
             <span aria-hidden="true">Accept</span>
         </button>
     </div>
