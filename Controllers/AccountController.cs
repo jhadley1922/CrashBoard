@@ -100,5 +100,21 @@ namespace CrashBoard.Controllers
             }
             return View(cvm);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Cities = repo.Cities.OrderBy(x => x.CITY_NAME).ToList();
+            ViewBag.Counties = repo.Counties.OrderBy(x => x.COUNTY_NAME).ToList();
+            ViewBag.Severities = repo.Severities.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Crash c)
+        {
+            repo.CreateCrash(c);
+            return View("CreateConfirm");
+        }
     }
 }
