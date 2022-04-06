@@ -3,7 +3,7 @@
 
 @model Crash
 
-<h2>Add Crash Record</h2>
+<h2>Edit Crash Record</h2>
 
 <form method="post">
     <div asp-validation-summary="All"></div>
@@ -56,61 +56,61 @@
     </select><br />
 
     <label asp-for="WORK_ZONE_RELATED">Work Zone Related: </label>
-    <input type="checkbox" asp-for="WORK_ZONE_RELATED" /><br />-->
+    <input  asp-for="WORK_ZONE_RELATED" /><br />
 
     <label asp-for="PEDESTRIAN_INVOLVED">Pedestrian Involved: </label>
-    <input type="checkbox" asp-for="PEDESTRIAN_INVOLVED"/><br />
+    <input asp-for="PEDESTRIAN_INVOLVED" /><br />
 
     <label asp-for="BICYCLIST_INVOLVED">Bicycle Involved: </label>
-    <input type="checkbox" asp-for="BICYCLIST_INVOLVED"/><br />
+    <input asp-for="BICYCLIST_INVOLVED" /><br />
 
     <label asp-for="MOTORCYCLE_INVOLVED">Motorcycle Involved: </label>
-    <input type="checkbox" asp-for="MOTORCYCLE_INVOLVED"/><br />
+    <input asp-for="MOTORCYCLE_INVOLVED" /><br />
 
     <label asp-for="IMPROPER_RESTRAINT">Improper Restraint: </label>
-    <input type="checkbox" asp-for="IMPROPER_RESTRAINT"/><br />
+    <input asp-for="IMPROPER_RESTRAINT" /><br />
 
     <label asp-for="UNRESTRAINED">Unrestrained: </label>
-    <input type="checkbox" asp-for="UNRESTRAINED"/><br />
+    <input asp-for="UNRESTRAINED" /><br />
 
     <label asp-for="DUI">DUI: </label>
-    <input type="checkbox" asp-for="DUI"/><br />
+    <input asp-for="DUI" /><br />
 
     <label asp-for="INTERSECTION_RELATED">Intersection Related: </label>
-    <input type="checkbox" asp-for="INTERSECTION_RELATED"/><br />
+    <input asp-for="INTERSECTION_RELATED" /><br />
 
     <label asp-for="WILD_ANIMAL_RELATED">Wild Animal Related: </label>
-    <input type="checkbox" asp-for="WILD_ANIMAL_RELATED"/><br />
+    <input asp-for="WILD_ANIMAL_RELATED" /><br />
 
     <label asp-for="DOMESTIC_ANIMAL_RELATED">Domestic Animal Related: </label>
-    <input type="checkbox" asp-for="DOMESTIC_ANIMAL_RELATED"/><br />
+    <input asp-for="DOMESTIC_ANIMAL_RELATED" /><br />
 
     <label asp-for="OVERTURN_ROLLOVER">Overturn Rollover: </label>
-    <input type="checkbox" asp-for="OVERTURN_ROLLOVER"/><br />
+    <input asp-for="OVERTURN_ROLLOVER" /><br />
 
     <label asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED">Commercial Vehicle Involved: </label>
-    <input type="checkbox" asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED"/><br />
+    <input asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED" /><br />
 
     <label asp-for="TEENAGE_DRIVER_INVOLVED">Teenage Driver Involved: </label>
-    <input type="checkbox" asp-for="TEENAGE_DRIVER_INVOLVED"/><br />
+    <input asp-for="TEENAGE_DRIVER_INVOLVED" /><br />
 
-    <label asp-for="OLDER_DRIVER_INVOLVED ">Older Driver Involved: </label>
-    <input type="checkbox" asp-for="OLDER_DRIVER_INVOLVED"/><br />
+    <label asp-for="OLDER_DRIVER_INVOLVED">Older Driver Involved: </label>
+    <input asp-for="OLDER_DRIVER_INVOLVED" /><br />
 
     <label asp-for="NIGHT_DARK_CONDITION">Night/Dark Condition: </label>
-    <input type="checkbox" asp-for="NIGHT_DARK_CONDITION"/><br />
+    <input asp-for="NIGHT_DARK_CONDITION" /><br />
 
     <label asp-for="SINGLE_VEHICLE">Single Vehicle: </label>
-    <input type="checkbox" asp-for="SINGLE_VEHICLE"/><br />
+    <input asp-for="SINGLE_VEHICLE" /><br />
 
     <label asp-for="DISTRACTED_DRIVING">Distracted Driving: </label>
-    <input type="checkbox" asp-for="DISTRACTED_DRIVING"/><br />
+    <input asp-for="DISTRACTED_DRIVING" /><br />
 
     <label asp-for="DROWSY_DRIVING">Drowsy Driving: </label>
-    <input type="checkbox" asp-for="DROWSY_DRIVING"/><br />
+    <input asp-for="DROWSY_DRIVING" /><br />
 
     <label asp-for="ROADWAY_DEPARTURE">Roadway Departure: </label>
-    <input type="checkbox" asp-for="ROADWAY_DEPARTURE"/><br />
+    <input asp-for="ROADWAY_DEPARTURE" /><br />
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

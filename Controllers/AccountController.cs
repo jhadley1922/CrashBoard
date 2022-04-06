@@ -116,5 +116,22 @@ namespace CrashBoard.Controllers
             repo.CreateCrash(c);
             return View("CreateConfirm");
         }
+
+        [HttpGet]
+        public IActionResult Edit(int crashpk)
+        {
+            var crash = repo.Crashes.FirstOrDefault(x => x.CRASH_PK == crashpk);
+            ViewBag.Cities = repo.Cities.OrderBy(x => x.CITY_NAME).ToList();
+            ViewBag.Counties = repo.Counties.OrderBy(x => x.COUNTY_NAME).ToList();
+            ViewBag.Severities = repo.Severities.ToList();
+            return View(crash);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Crash c)
+        {
+            repo.SaveCrash(c);
+            return View("EditConfirm");
+        }
     }
 }
