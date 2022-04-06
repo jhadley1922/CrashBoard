@@ -2,10 +2,81 @@
     ViewData["Title"] = "Home";
 }
 
-@model List<Crash>
+<header class="bg-dark py-5">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2">UDOT CrashBoard</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">We are committed to finding effective solutions to keep Utah drivers safe</p>
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                        <a class="btn btn-outline-light btn-lg px-4" href="#about">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="~/img/UDOT.png" width="400" alt="UDOT logo" /></div>
+        </div>
+    </div>
+</header>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Describe background, site information and its uses</p>
-</div>
+<!-- About section one-->
+<section class="py-5 bg-light" id="about">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+            <div class="col-lg-6">
+                <h2 class="fw-bolder">The Issue</h2>
+                <p class="lead fw-normal text-muted mb-0">Basic info about the issue.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- About section two-->
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-first order-lg-last"><img class="img-fluid rounded mb-5 mb-lg-0" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+            <div class="col-lg-6">
+                <h2 class="fw-bolder">About Us</h2>
+                <p class="lead fw-normal text-muted mb-0">Quick info about our goals</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team members section-->
+<section class="py-5 bg-light">
+    <div class="container px-5 my-5">
+        <div class="text-center">
+            <h2 class="fw-bolder">Our team</h2>
+            <p class="lead fw-normal text-muted mb-5">Dedicated to quality and your success</p>
+        </div>
+        <div class="row gx-5 row-cols-1 row-cols-sm-2 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5 mb-5 mb-xl-0">
+                <div class="text-center">
+                    <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                    <h5 class="fw-bolder">Thomas Lund</h5>
+                </div>
+            </div>
+            <div class="col mb-5 mb-5 mb-xl-0">
+                <div class="text-center">
+                    <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                    <h5 class="fw-bolder">Sierra Griffin</h5>
+                </div>
+            </div>
+            <div class="col mb-5 mb-5 mb-sm-0">
+                <div class="text-center">
+                    <img class="img-fluid rounded-circle mb-4 px-4" src="https://dummyimage.com/150x150/ced4da/6c757d" alt="..." />
+                    <h5 class="fw-bolder">Cade Jorgensen</h5>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="text-center">
+                    <img class="img-fluid mb-4 px-4" src="~/img/Jake.jpg" alt="..." />
+                    <h5 class="fw-bolder">Jake Hadley</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

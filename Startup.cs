@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using CrashBoard.Models;
 using Microsoft.EntityFrameworkCore;
+using Amazon.SecretsManager;
+using Amazon;
 
 namespace CrashBoard
 {
