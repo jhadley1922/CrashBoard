@@ -13,6 +13,7 @@ using CrashBoard.Models;
 using Microsoft.EntityFrameworkCore;
 using Amazon.SecretsManager;
 using Amazon;
+using Microsoft.AspNetCore.Identity;
 
 namespace CrashBoard
 {
@@ -35,6 +36,11 @@ namespace CrashBoard
                 options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
             });
 
+            services.AddDbContext<AppIdentityDBContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+            });
+
             // Added this to enable cookies
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -53,6 +59,21 @@ namespace CrashBoard
                 options.IncludeSubDomains = true;
                 options.MaxAge = TimeSpan.FromDays(364);
             });
+
+            //Password Properties -- these are the default
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

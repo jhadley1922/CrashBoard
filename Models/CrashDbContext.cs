@@ -12,7 +12,7 @@ namespace CrashBoard.Models
         {
 
         }
-        public CrashDbContext(DbContextOptions options) : base(options) { }
+        public CrashDbContext(DbContextOptions<CrashDbContext> options) : base(options) { }
 
         public DbSet<Crash> Crashes { get; set; }
         public DbSet<City> Cities { get; set; }
