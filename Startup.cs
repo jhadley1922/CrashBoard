@@ -78,7 +78,10 @@ namespace CrashBoard
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("CountyPage", "{county}/{pageNum}",
+                endpoints.MapControllerRoute("SearchPage", "{severity}/{pageNum}/{searchString}",
+                    new { Controller = "Home", action = "CrashData" });
+
+                endpoints.MapControllerRoute("SeverityPage", "{severity}/{pageNum}",
                     new { Controller = "Home", action = "CrashData" });
 
                 endpoints.MapControllerRoute(

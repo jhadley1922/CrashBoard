@@ -25,13 +25,14 @@ namespace CrashBoard.Controllers
             return View();
         }
 
-        public IActionResult CrashData(int county, int pageNum)
+        public IActionResult CrashData(int severity, int pageNum, string searchString)
         {
             int pageSize = 50;
 
             ViewBag.PageNum = pageNum;
-            ViewBag.SelectedCounty = county;
+            ViewBag.SelectedSeverity = severity;
             ViewBag.TotalPages = (int)Math.Ceiling((double)repo.Crashes.Count() / pageSize);
+            ViewBag.SearchString = searchString;
 
             var cvm = new CrashesViewModel
             {
@@ -42,7 +43,8 @@ namespace CrashBoard.Controllers
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)
             };
-            if (county != 0)
+
+            if (severity != 0 && !String.IsNullOrEmpty(searchString))
             {
                 cvm = new CrashesViewModel
                 {
@@ -50,11 +52,59 @@ namespace CrashBoard.Controllers
                         .Include(x => x.CITY)
                         .Include(x => x.COUNTY)
                         .Include(x => x.SEVERITY)
-                        .Where(x => x.CountyId == county)
+                        .Where(x => x.SeverityId == severity)
+                        .Where(x => x.CRASH_ID.Contains(searchString)
+                               || x.CITY.CITY_NAME.Contains(searchString)
+                               || x.COUNTY.COUNTY_NAME.Contains(searchString)
+                               || x.MAIN_ROAD_NAME.Contains(searchString))
                         .Skip((pageNum - 1) * pageSize)
                         .Take(pageSize)
                 };
-                ViewBag.TotalPages = (int)Math.Ceiling((double)repo.Crashes.Where(x => x.CountyId == county).Count() / pageSize);
+                ViewBag.TotalPages = (int)Math.Ceiling((double)repo.Crashes
+                        .Where(x => x.SeverityId == severity)
+                        .Where(x => x.CRASH_ID.Contains(searchString)
+                               || x.CITY.CITY_NAME.Contains(searchString)
+                               || x.COUNTY.COUNTY_NAME.Contains(searchString)
+                               || x.MAIN_ROAD_NAME.Contains(searchString))
+                        .Count() / pageSize);
+            }
+            else if (!String.IsNullOrEmpty(searchString))
+            {
+                cvm = new CrashesViewModel
+                {
+                    Crashes = repo.Crashes
+                        .Include(x => x.CITY)
+                        .Include(x => x.COUNTY)
+                        .Include(x => x.SEVERITY)
+                        .Where(x => x.CRASH_ID.Contains(searchString)
+                               || x.CITY.CITY_NAME.Contains(searchString)
+                               || x.COUNTY.COUNTY_NAME.Contains(searchString)
+                               || x.MAIN_ROAD_NAME.Contains(searchString))
+                        .Skip((pageNum - 1) * pageSize)
+                        .Take(pageSize)
+                };
+                ViewBag.TotalPages = (int)Math.Ceiling((double)repo.Crashes
+                         .Where(x => x.CRASH_ID.Contains(searchString)
+                               || x.CITY.CITY_NAME.Contains(searchString)
+                               || x.COUNTY.COUNTY_NAME.Contains(searchString)
+                               || x.MAIN_ROAD_NAME.Contains(searchString))
+                         .Count() / pageSize);
+            }
+            else if(severity != 0)
+            {
+                cvm = new CrashesViewModel
+                {
+                    Crashes = repo.Crashes
+                        .Include(x => x.CITY)
+                        .Include(x => x.COUNTY)
+                        .Include(x => x.SEVERITY)
+                        .Where(x => x.SeverityId == severity)
+                        .Skip((pageNum - 1) * pageSize)
+                        .Take(pageSize)
+                };
+                ViewBag.TotalPages = (int)Math.Ceiling((double)repo.Crashes
+                    .Where(x => x.SeverityId == severity)
+                    .Count() / pageSize);
             }
             return View(cvm);
         }

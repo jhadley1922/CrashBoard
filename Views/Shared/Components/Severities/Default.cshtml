@@ -1,0 +1,15 @@
+﻿@{
+}
+
+@model List<CrashBoard.Models.Severity>
+
+<div class="container">
+    <a asp-controller="Home" asp-action="CrashData" asp-route-severity="0" asp-route-pageNum="1" 
+       asp-route-searchString="" class="btn @(ViewBag.SelectedSeverity == "0" ? "btn-primary" : "btn-outline-primary") btn-block">Home</a>
+
+    @foreach(Severity s in Model)
+    {
+        <a asp-controller="Home" asp-action="CrashData" asp-route-severity="@s.SEVERITY_ID" asp-route-pageNum="1" asp-route-searchString="@ViewBag.SearchString"
+           class="btn btn-block @(ViewBag.SelectedSeverity == s.SEVERITY_ID.ToString() ? "btn-primary" : "btn-outline-primary")">@s.SEVERITY_DESCRIPTION</a>
+    }
+</div>

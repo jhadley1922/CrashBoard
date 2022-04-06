@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Components
 {
-    public class CountiesViewComponent : ViewComponent
+    public class SeveritiesViewComponent : ViewComponent
     {
         private ICrashRepository repo { get; set; }
 
-        public CountiesViewComponent(ICrashRepository temp)
+        public SeveritiesViewComponent(ICrashRepository temp)
         {
             repo = temp;
         }
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedCounty = RouteData?.Values["county"];
+            ViewBag.SelectedSeverity = RouteData?.Values["severity"];
 
-            var counties = repo.Counties.ToList();
+            var severities = repo.Severities.ToList();
 
-            return View(counties);
+            return View(severities);
 
         }
     }
