@@ -97,7 +97,7 @@ namespace CrashBoard
             //content security policy (CSP) HTTP header 
             app.Use(async (context, next) =>
             {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self' cdn.jsdelivr.net;");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self' cdn.jsdelivr.net 'unsafe-inline';");
                 await next();
             });
 
