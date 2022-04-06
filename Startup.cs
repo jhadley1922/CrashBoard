@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using CrashBoard.Models;
 using Microsoft.EntityFrameworkCore;
+using Amazon.SecretsManager;
+using Amazon;
 
 namespace CrashBoard
 {
@@ -43,6 +45,10 @@ namespace CrashBoard
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddScoped<ICrashRepository, EFCrashRepository>();
+
+            services.AddScoped<IAmazonSecretsManager>(a =>
+              new AmazonSecretsManagerClient(RegionEndpoint.USEast1)
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
