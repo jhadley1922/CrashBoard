@@ -18,12 +18,12 @@ namespace CrashBoard.Models
         public double? LAT_UTM_Y { get; set; }
         public double? LONG_UTM_X { get; set; }
         public string? MAIN_ROAD_NAME { get; set; }
-        public int? CityId { get; set; }
-        public City? CITY { get; set; }
-        public int? CountyId { get; set; }
-        public County? COUNTY { get; set; }
-        public int? SeverityId { get; set; }
-        public Severity? SEVERITY { get; set; }
+        public int CityId { get; set; }
+        public City CITY { get; set; }
+        public int CountyId { get; set; }
+        public County COUNTY { get; set; }
+        public int SeverityId { get; set; }
+        public Severity SEVERITY { get; set; }
         public bool? WORK_ZONE_RELATED { get; set; }
         public bool? PEDESTRIAN_INVOLVED { get; set; }
         public bool? BICYCLIST_INVOLVED { get; set; }

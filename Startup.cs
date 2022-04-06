@@ -46,9 +46,13 @@ namespace CrashBoard
             });
             services.AddScoped<ICrashRepository, EFCrashRepository>();
 
-            services.AddScoped<IAmazonSecretsManager>(a =>
-              new AmazonSecretsManagerClient(RegionEndpoint.USEast1)
-            );
+            //enables HSTS??
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(364);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,10 +80,8 @@ namespace CrashBoard
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "Paging",
-                    pattern: "CrashData/{pageNum}",
-                    defaults: new { Controller = "Home", action = "CrashData" });
+                endpoints.MapControllerRoute("CountyPage", "{county}/{pageNum}",
+                    new { Controller = "Home", action = "CrashData" });
 
                 endpoints.MapControllerRoute(
                     name: "default",
