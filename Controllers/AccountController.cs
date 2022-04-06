@@ -100,5 +100,18 @@ namespace CrashBoard.Controllers
             }
             return View(cvm);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Crash c)
+        {
+            repo.CreateCrash(c);
+            return RedirectToAction("CreateConfirm");
+        }
     }
 }

@@ -67,6 +67,10 @@
             </table>
 
             <div class="text-center">
+                <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+                   asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="1"
+                   asp-route-searchString="@ViewBag.SearchString">First</a>
+
                 @if (ViewBag.PageNum <= 1)
                 {
                     <a disabled class="btn btn-secondary text-light">Back</a>
@@ -83,10 +87,16 @@
                 }
                 else
                 {
-                    <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData" 
+                    <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
                        asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="@(ViewBag.PageNum + 1)"
                        asp-route-searchString="@ViewBag.SearchString">Next</a>
                 }
+
+                <a class="btn btn-primary text-light" asp-controller="Home" asp-action="CrashData"
+                   asp-route-severity="@ViewBag.SelectedSeverity" asp-route-pageNum="@ViewBag.TotalPages"
+                   asp-route-searchString="@ViewBag.SearchString">Last</a>
+
+                <p>@ViewBag.PageNum of @ViewBag.TotalPages pages</p>
             </div>
         </div>
     </div>

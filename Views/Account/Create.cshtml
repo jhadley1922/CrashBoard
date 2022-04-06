@@ -1,0 +1,112 @@
+﻿@{
+}
+
+@model Crash
+
+<h2>Add Crash Record</h2>
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+
+    <label asp-for="CRASH_ID">Crash ID: </label>
+    <input asp-for="CRASH_ID" /><br />
+
+    <label asp-for="CRASH_DATETIME">Date and Time: </label>
+    <input type="datetime-local" asp-for="CRASH_DATETIME" /><br />
+
+    <label asp-for="ROUTE">Route: </label>
+    <input asp-for="ROUTE" /><br />
+
+    <label asp-for="MILEPOINT">Milepoint: </label>
+    <input asp-for="MILEPOINT" /><br />
+
+    <label asp-for="LAT_UTM_Y">Latitude: </label>
+    <input asp-for="LAT_UTM_Y" /><br />
+
+    <label asp-for="LONG_UTM_X">Longitude: </label>
+    <input asp-for="LONG_UTM_X" /><br />
+
+    <label asp-for="MAIN_ROAD_NAME">Road: </label>
+    <input asp-for="MAIN_ROAD_NAME" /><br />
+
+    <label asp-for="CityId"></label>
+    <select asp-for="CityId">
+        @foreach (City c in ViewBag.Cities)
+        {
+            <option value="@c.CITY_ID">@c.CITY_NAME</option>
+        }
+    </select><br />
+
+    <label asp-for="CountyId"></label>
+    <select asp-for="CountyId">
+        @foreach (County c in ViewBag.Counties)
+        {
+            <option value="@c.COUNTY_ID">@c.COUNTY_NAME</option>
+        }
+    </select><br />
+
+    <label asp-for="SeverityId"></label>
+    <select asp-for="SeverityId">
+        @foreach (Severity s in ViewBag.Severities)
+        {
+            <option value="@s.SEVERITY_ID">@s.SEVERITY_DESCRIPTION</option>
+        }
+    </select>
+
+    <label asp-for="WORK_ZONE_RELATED"></label>
+    <input type="checkbox" asp-for="WORK_ZONE_RELATED" />Work Zone Related: <br />
+
+    <label asp-for="PEDESTRIAN_INVOLVED"></label>
+    <input type="checkbox" asp-for="PEDESTRIAN_INVOLVED" />Pedestrian Involved: <br />
+
+    <label asp-for="BICYCLIST_INVOLVED"></label>
+    <input type="checkbox" asp-for="BICYCLIST_INVOLVED" />Bicycle Involved: <br />
+
+    <label asp-for="MOTORCYCLE_INVOLVED"></label>
+    <input type="checkbox" asp-for="MOTORCYCLE_INVOLVED" />Motorcycle Involved: <br />
+
+    <label asp-for="IMPROPER_RESTRAINT"></label>
+    <input type="checkbox" asp-for="IMPROPER_RESTRAINT" />Improper Restraint: <br />
+
+    <label asp-for="UNRESTRAINED"></label>
+    <input type="checkbox" asp-for="UNRESTRAINED" />Unrestrained: <br />
+
+    <label asp-for="DUI"></label>
+    <input type="checkbox" asp-for="DUI" />DUI: <br />
+
+    <label asp-for="INTERSECTION_RELATED"></label>
+    <input type="checkbox" asp-for="INTERSECTION_RELATED" />Intersection Related: <br />
+
+    <label asp-for="WILD_ANIMAL_RELATED"></label>
+    <input type="checkbox" asp-for="WILD_ANIMAL_RELATED" />Wild Animal Related: <br />
+
+    <label asp-for="DOMESTIC_ANIMAL_RELATED"></label>
+    <input type="checkbox" asp-for="DOMESTIC_ANIMAL_RELATED" />Domestic Animal Related: <br />
+
+    <label asp-for="OVERTURN_ROLLOVER"></label>
+    <input type="checkbox" asp-for="OVERTURN_ROLLOVER" />Overturn Rollover: <br />
+
+    <label asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED"></label>
+    <input type="checkbox" asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED" />Commercial Vehicle Involved: <br />
+
+    <label asp-for="TEENAGE_DRIVER_INVOLVED"></label>
+    <input type="checkbox" asp-for="TEENAGE_DRIVER_INVOLVED" />Teenage Driver Involved: <br />
+
+    <label asp-for="OLDER_DRIVER_INVOLVED "></label>
+    <input type="checkbox" asp-for="OLDER_DRIVER_INVOLVED" />Older Driver Involved: <br />
+
+    <label asp-for="NIGHT_DARK_CONDITION"></label>
+    <input type="checkbox" asp-for="NIGHT_DARK_CONDITION" />Night/Dark Condition: <br />
+
+    <label asp-for="SINGLE_VEHICLE"></label>
+    <input type="checkbox" asp-for="SINGLE_VEHICLE" />Single Vehicle: <br />
+
+    <label asp-for="DISTRACTED_DRIVING"></label>
+    <input type="checkbox" asp-for="DISTRACTED_DRIVING" />Distracted Driving: <br />
+
+    <label asp-for="DROWSY_DRIVING"></label>
+    <input type="checkbox" asp-for="DROWSY_DRIVING" /><br />
+
+    <label asp-for="ROADWAY_DEPARTURE"></label>
+    <input type="checkbox" asp-for="ROADWAY_DEPARTURE" /><br />
+</form>
