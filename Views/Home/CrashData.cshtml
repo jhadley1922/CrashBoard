@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Crash Details";
+    ViewData["Title"] = "Crashes";
 }
 
 @model CrashesViewModel
@@ -48,7 +48,7 @@
                     @foreach (Crash c in Model.Crashes)
                     {
                         <tr>
-                            <td>@c.CRASH_ID</td>
+                            <td><a asp-controller="Home" asp-action="CrashDetails" asp-route-c="@c.CRASH_PK">@c.CRASH_ID</a></td>
                             <td>@c.CRASH_DATETIME</td>
                             <td>@c.ROUTE</td>
                             <td>@c.MAIN_ROAD_NAME</td>
