@@ -1,5 +1,6 @@
 ﻿using CrashBoard.Models;
 using CrashBoard.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,9 +14,70 @@ namespace CrashBoard.Controllers
     {
         private ICrashRepository repo { get; set; }
 
-        public AccountController(ICrashRepository temp)
+        private UserManager<IdentityUser> userManager;
+        private SignInManager<IdentityUser> signInManager;
+
+        public AccountController(UserManager<IdentityUser> um, SignInManager<IdentityUser> sim, ICrashRepository temp)
         {
+            userManager = um;
+            signInManager = sim;
             repo = temp;
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            if (LoginCookieModel.UserId != null)
+            {
+                if (userManager.FindByIdAsync(LoginCookieModel.UserId) != null)
+                {
+                    var am = new AdminModel
+                    {
+                        severity = 0,
+                        pageNum = 1,
+                        searchString = ""
+                    };
+                    return RedirectToAction("Admin", am);
+                }
+            }
+            
+            return View(new LoginModel { });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModel lm)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = await userManager.FindByNameAsync(lm.Username);
+
+                if (user != null)
+                {
+                    await signInManager.SignOutAsync();
+
+                    if ((await signInManager.PasswordSignInAsync(user, lm.Password, false, false)).Succeeded)
+                    {
+                        var am = new AdminModel
+                        {
+                            severity = 0,
+                            pageNum = 1,
+                            searchString = ""
+                        };
+                        LoginCookieModel.UserId = user.Id;
+                        return RedirectToAction("Admin", am);
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Invalid name or password.");
+            return View(lm);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            LoginCookieModel.UserId = null;
+
+            return View("Login");
         }
         public IActionResult Admin(int severity, int pageNum, string searchString)
         {
