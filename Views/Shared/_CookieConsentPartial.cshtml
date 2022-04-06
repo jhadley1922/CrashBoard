@@ -1,16 +1,16 @@
 ﻿<!--Partial View for Cookie Consent Notification/Popup-->
-@using Microsoft.AspNetCore.Http.Features
+@*@using Microsoft.AspNetCore.Http.Features*@
 
-@{
-    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
-    var showBanner = !consentFeature?.CanTrack ?? false;
-    var cookieString = consentFeature?.CreateConsentCookie();
-}
+@*@{
+        var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+        var showBanner = !consentFeature?.CanTrack ?? false;
+        var cookieString = consentFeature?.CreateConsentCookie();
+    }*@
 
-@if (showBanner)
-{
-    <!--Banner that displays the cookie notification-->
-    <div id="cookieConsent" class="alert fade show border-dark text-center" role="alert">
+@*@if (showBanner)
+    {*@
+<!--Banner that displays the cookie notification-->
+@*<div id="cookieConsent" class="alert fade show border-dark text-center" role="alert">
         <p>We use cookies to enhance your browsing experience. By clicking "Accept" you consent to our use of cookies.</p>
         <a class="btn btn-primary m-2" asp-controller="Home" asp-action="Privacy">View Our Privacy Policy</a>
         <button type="button" class="btn btn-primary text-white m-2" data-dismiss="alert" aria-label="Close" SameSite="SameSiteMode.Lax" data-cookie-string="@cookieString">
@@ -24,5 +24,33 @@
                 document.cookie = button.dataset.cookieString;
             }, false);
         })();
-    </script>
+    </script>*@
+@*}*@
+
+@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
 }
+
+@if (showBanner)
+{
+    <div id="cookieConsent" class="alert alert-dismissible fade show border-dark text-center" role="alert">
+        <p>We use cookies to enhance your browsing experience. By clicking "Accept" you consent to our use of cookies.</p>
+        <a class="btn btn-primary m-2" asp-controller="Home" asp-action="Privacy">View Our Privacy Policy</a>
+        <button type="button" class="btn btn-primary text-white m-2" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+            <span aria-hidden="true">Accept</span>
+        </button>
+    </div>
+
+    <script>(function () {
+            var button = document.querySelector("#cookieConsent button[data-cookie-string]");
+            button.addEventListener("click", function (event) {
+                document.cookie = button.dataset.cookieString;
+            }, false);
+        })();</script>
+}
+
+@*accept-policy close*@
