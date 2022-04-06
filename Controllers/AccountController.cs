@@ -133,5 +133,19 @@ namespace CrashBoard.Controllers
             repo.SaveCrash(c);
             return View("EditConfirm");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int crashpk)
+        {
+            var crash = repo.Crashes.FirstOrDefault(x => x.CRASH_PK == crashpk);
+            return View(crash);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Crash c)
+        {
+            repo.DeleteCrash(c);
+            return View("DeleteConfirm");
+        }
     }
 }

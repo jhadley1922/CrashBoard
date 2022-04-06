@@ -1,0 +1,14 @@
+﻿@{
+}
+
+@model Crash
+
+<h2>Delete Crash ID: @Model.CRASH_ID?</h2>
+
+<form method="post" asp-action="Delete">
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <a class="btn btn-secondary" asp-controller="Account" asp-action="Admin"
+       asp-route-severity="0" asp-route-pageNum="1" asp-route-searchString="">Cancel</a>
+
+    <input hidden asp-for="CRASH_PK" />
+</form>
