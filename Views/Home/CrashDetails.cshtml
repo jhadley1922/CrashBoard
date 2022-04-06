@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Crash Details";
+}
+
+@model Crash
+
+<h2>Crash ID: @Model.CRASH_ID</h2>
+<br />
+<ul>
+    <li>Date and Time: @Model.CRASH_DATETIME</li>
+    <li>Route: @Model.ROUTE</li>
+    <li>Milepoint: @Model.MILEPOINT</li>
+    <li>Latitude: @Model.LAT_UTM_Y</li>
+    <li>Longitude: @Model.LONG_UTM_X</li>
+    <li>Road: @Model.MAIN_ROAD_NAME</li>
+    <li>City: @Model.CITY.CITY_NAME</li>
+    <li>County: @Model.COUNTY.COUNTY_NAME</li>
+    <li>Severity: @Model.SEVERITY.SEVERITY_DESCRIPTION</li>
+    <li>Work Zone Related: @Model.WORK_ZONE_RELATED</li>
+    <li>Pedestrian Involved: @Model.PEDESTRIAN_INVOLVED</li>
+    <li>Improper Restraint: @Model.IMPROPER_RESTRAINT</li>
+    <li>Unrestrained: @Model.UNRESTRAINED</li>
+    <li>DUI: @Model.DUI</li>
+    <li>Intersection Related: @Model.INTERSECTION_RELATED</li>
+    <li>Wild Animal Related: @Model.WILD_ANIMAL_RELATED</li>
+    <li>Domestic Animal Related: @Model.DOMESTIC_ANIMAL_RELATED</li>
+    <li>Overturn Rollover: @Model.OVERTURN_ROLLOVER</li>
+    <li>Commercial Vehicle Involved: @Model.COMMERCIAL_MOTOR_VEH_INVOLVED</li>
+    <li>Teenage Driver Involved: @Model.TEENAGE_DRIVER_INVOLVED</li>
+    <li>Older Driver Involved: @Model.OLDER_DRIVER_INVOLVED</li>
+    <li>Night/Dark Conditions: @Model.NIGHT_DARK_CONDITION</li>
+    <li>Single Vehicle: @Model.SINGLE_VEHICLE</li>
+    <li>Distracted Driving: @Model.DISTRACTED_DRIVING</li>
+    <li>Drowsy Driving: @Model.DROWSY_DRIVING</li>
+    <li>Roadway Departure: @Model.ROADWAY_DEPARTURE</li>
+</ul> 

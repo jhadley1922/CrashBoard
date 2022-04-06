@@ -2,30 +2,22 @@
 using CrashBoard.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CrashBoard.Controllers
 {
-    public class HomeController : Controller
+    public class AccountController : Controller
     {
         private ICrashRepository repo { get; set; }
 
-        public HomeController(ICrashRepository temp)
+        public AccountController(ICrashRepository temp)
         {
             repo = temp;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult CrashData(int severity, int pageNum, string searchString)
+        public IActionResult Admin(int severity, int pageNum, string searchString)
         {
             int pageSize = 50;
 
@@ -90,7 +82,7 @@ namespace CrashBoard.Controllers
                                || x.MAIN_ROAD_NAME.Contains(searchString))
                          .Count() / pageSize);
             }
-            else if(severity != 0)
+            else if (severity != 0)
             {
                 cvm = new CrashesViewModel
                 {
@@ -107,21 +99,6 @@ namespace CrashBoard.Controllers
                     .Count() / pageSize);
             }
             return View(cvm);
-        }
-
-        public IActionResult CrashDetails(int crashpk)
-        {
-            var crash = repo.Crashes
-                .Include(x => x.CITY)
-                .Include(x => x.COUNTY)
-                .Include(x => x.SEVERITY)
-                .FirstOrDefault(x => x.CRASH_PK == crashpk);
-            return View(crash);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
     }
 }
