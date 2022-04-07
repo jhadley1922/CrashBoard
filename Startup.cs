@@ -90,7 +90,7 @@ namespace CrashBoard
                 app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains().Preload());
             }
 
-            //app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains().Preload());
+            app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains().Preload());
             //app.UseHsts();
             app.UseHttpsRedirection();
 

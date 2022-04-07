@@ -4,33 +4,341 @@
 
 @model Crash
 
-<h2>Crash ID: @Model.CRASH_ID</h2>
-<br />
-<ul>
-    <li>Date and Time: @Model.CRASH_DATETIME</li>
-    <li>Route: @Model.ROUTE</li>
-    <li>Milepoint: @Model.MILEPOINT</li>
-    <li>Latitude: @Model.LAT_UTM_Y</li>
-    <li>Longitude: @Model.LONG_UTM_X</li>
-    <li>Road: @Model.MAIN_ROAD_NAME</li>
-    <li>City: @Model.CITY.CITY_NAME</li>
-    <li>County: @Model.COUNTY.COUNTY_NAME</li>
-    <li>Severity: @Model.SEVERITY.SEVERITY_DESCRIPTION</li>
-    <li>Work Zone Related: @Model.WORK_ZONE_RELATED</li>
-    <li>Pedestrian Involved: @Model.PEDESTRIAN_INVOLVED</li>
-    <li>Improper Restraint: @Model.IMPROPER_RESTRAINT</li>
-    <li>Unrestrained: @Model.UNRESTRAINED</li>
-    <li>DUI: @Model.DUI</li>
-    <li>Intersection Related: @Model.INTERSECTION_RELATED</li>
-    <li>Wild Animal Related: @Model.WILD_ANIMAL_RELATED</li>
-    <li>Domestic Animal Related: @Model.DOMESTIC_ANIMAL_RELATED</li>
-    <li>Overturn Rollover: @Model.OVERTURN_ROLLOVER</li>
-    <li>Commercial Vehicle Involved: @Model.COMMERCIAL_MOTOR_VEH_INVOLVED</li>
-    <li>Teenage Driver Involved: @Model.TEENAGE_DRIVER_INVOLVED</li>
-    <li>Older Driver Involved: @Model.OLDER_DRIVER_INVOLVED</li>
-    <li>Night/Dark Conditions: @Model.NIGHT_DARK_CONDITION</li>
-    <li>Single Vehicle: @Model.SINGLE_VEHICLE</li>
-    <li>Distracted Driving: @Model.DISTRACTED_DRIVING</li>
-    <li>Drowsy Driving: @Model.DROWSY_DRIVING</li>
-    <li>Roadway Departure: @Model.ROADWAY_DEPARTURE</li>
-</ul> 
+<!-- Crash Details -->
+<section class="bg-light py-5">
+    <div class="container px-5 my-5">
+        <div class="text-center mb-5">
+            <h1 class="fw-bolder">Crash Details</h1>
+            <!--<p class="lead fw-normal text-muted mb-0">With our no hassle pricing plans</p>-->
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <!-- Details -->
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-5 mb-xl-0">
+                    <div class="card-body p-5">
+                        <div class="small text-uppercase fw-bold">Details</div><br />
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2">
+                                <strong>Crash ID: </strong>
+                                @Model.CRASH_ID
+                            </li>
+                            <li class="mb-2">
+                                <strong>Date and Time: </strong>
+                                @Model.CRASH_DATETIME
+                            </li>
+                            <li class="mb-2">
+                                <strong>Route: </strong>
+                                @Model.ROUTE
+                            </li>
+                            <li class="mb-2">
+                                <strong>Milepoint: </strong>
+                                @Model.MILEPOINT
+                            </li>
+                            <li class="mb-2">
+                                <strong>Latitude: </strong>
+                                @Model.LAT_UTM_Y
+                            </li>
+                            <li class="mb-2">
+                                <strong>Longitude: </strong>
+                                @Model.LONG_UTM_X
+                            </li>
+                            <li class="mb-2">
+                                <strong>Road Name: </strong>
+                                @Model.MAIN_ROAD_NAME
+                            </li>
+                            <li class="mb-2">
+                                <strong>City: </strong>
+                                @Model.CITY.CITY_NAME
+                            </li>
+                            <li class="mb-2">
+                                <strong>County: </strong>
+                                @Model.COUNTY.COUNTY_NAME
+                            </li>
+                            <li class="mb-2">
+                                <strong>Severity: </strong>
+                                @Model.SEVERITY.SEVERITY_DESCRIPTION
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Notes -->
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-5 mb-xl-0">
+                    <div class="card-body p-5">
+                        <div class="small text-uppercase fw-bold">Notes</div><br />
+                        <ul class="list-unstyled mb-4">
+                            <!-- If statements for each bool to see if its true or not -->
+                            @if (Model.WORK_ZONE_RELATED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Work Zone Related
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Work Zone Related
+                                </li>
+                            }
+                            @if (Model.PEDESTRIAN_INVOLVED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Pedestrian Involved
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Pedestrian Involved
+                                </li>
+                            }
+                            @if (Model.BICYCLIST_INVOLVED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Bicyclist Involved
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Bicyclist Involved
+                                </li>
+                            }
+                            @if (Model.MOTORCYCLE_INVOLVED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Motorcycle Involved
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Motorcycle Involved
+                                </li>
+                            }
+                            @if (Model.IMPROPER_RESTRAINT == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Improper Restraint
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Improper Restraint
+                                </li>
+                            }
+                            @if (Model.UNRESTRAINED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Unrestrained
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Unrestrained
+                                </li>
+                            }
+                            @if (Model.DUI == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    DUI
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    DUI
+                                </li>
+                            }
+                            @if (Model.INTERSECTION_RELATED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Intersection Related
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Intersection Related
+                                </li>
+                            }
+                            @if (Model.WILD_ANIMAL_RELATED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Wild Animal Related
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Wild Animal Related
+                                </li>
+                            }
+                            @if (Model.DOMESTIC_ANIMAL_RELATED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Domestic Animal Related
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Domestic Animal Related
+                                </li>
+                            }
+                            @if (Model.OVERTURN_ROLLOVER == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Overturn Rollover
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Overturn Rollover
+                                </li>
+                            }
+                            @if (Model.COMMERCIAL_MOTOR_VEH_INVOLVED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Commercial Motor Vehicle Involved
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Commercial Motor Vehicle Involved
+                                </li>
+                            }
+                            @if (Model.TEENAGE_DRIVER_INVOLVED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Teenage Driver Involved
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Teenage Driver Involved
+                                </li>
+                            }
+                            @if (Model.OLDER_DRIVER_INVOLVED == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Older Driver Involved
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Older Driver Involved
+                                </li>
+                            }
+                            @if (Model.NIGHT_DARK_CONDITION == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Night or Dark Conditions
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Night or Dark Conditions
+                                </li>
+                            }
+                            @if (Model.SINGLE_VEHICLE == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Single Vehicle
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Single Vehicle
+                                </li>
+                            }
+                            @if (Model.DISTRACTED_DRIVING == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Distracted Driving
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Distracted Driving
+                                </li>
+                            }
+                            @if (Model.DROWSY_DRIVING == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Drowsy Driving
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Drowsy Driving
+                                </li>
+                            }
+                            @if (Model.ROADWAY_DEPARTURE == true)
+                            {
+                                <li>
+                                    <i class="bi bi-check text-primary"></i>
+                                    Roadway Departure
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="text-muted">
+                                    <i class="bi bi-x"></i>
+                                    Roadway Departure
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
