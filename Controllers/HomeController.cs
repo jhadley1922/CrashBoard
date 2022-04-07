@@ -123,5 +123,10 @@ namespace CrashBoard.Controllers
         {
             return View();
         }
+
+        public IActionResult Solution()
+        {
+            return View();
+        }
     }
 }
