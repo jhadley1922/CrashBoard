@@ -44,15 +44,6 @@ namespace CrashBoard
                 //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
             });
 
-            // Added this to enable cookies
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential 
-                // cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                // requires using Microsoft.AspNetCore.Http;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
             services.AddScoped<ICrashRepository, EFCrashRepository>();
 
             //enables HSTS??
@@ -63,20 +54,30 @@ namespace CrashBoard
             //    options.MaxAge = TimeSpan.FromDays(365);
             //});
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
+
             //Password Properties -- these are the default
             services.Configure<IdentityOptions>(options =>
             {
-                // Default Password settings.
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 14; //According to Microsoft, a minimum length of 14 is  best practice 
-                options.Password.RequiredUniqueChars = 5;
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false; //Apparently research now says to not enfore complexity requirements
+                options.Password.RequiredLength = 8; //8 is the reccommended length, reqs longer than that lead to repeating patterns
+                options.Password.RequiredUniqueChars = 5; //idk about this?
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDBContext>();
+            // Added this to enable cookies
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             services.AddSingleton<InferenceSession>(
               new InferenceSession("Models/severity_reg.onnx")
