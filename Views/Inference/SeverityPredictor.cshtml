@@ -85,7 +85,30 @@
         <div class="col col-1"></div>
         <div class="col col-4">
             <h2>Predicted Crash Severity</h2><br />
-            <h3>@ViewBag.SeverityPrediction</h3>
+            @if (ViewBag.SeverityPrediction == "No Injury")
+            {
+                <h3 class="text-success">@ViewBag.SeverityPrediction</h3>
+            }
+            else if (ViewBag.SeverityPrediction == "Possible Injury")
+            {
+                <h3 class="text-warning">@ViewBag.SeverityPrediction</h3>
+            }
+            else if (ViewBag.SeverityPrediction == "Suspected Minor Injury")
+            {
+                <h3 class="text-warning">@ViewBag.SeverityPrediction</h3>
+            }
+            else if (ViewBag.SeverityPrediction == "Suspected Serious Injury")
+            {
+                <h3 class="text-danger">@ViewBag.SeverityPrediction</h3>
+            }
+            else if (ViewBag.SeverityPrediction == "Fatal")
+            {
+                <h3 class="text-danger">@ViewBag.SeverityPrediction</h3>
+            }
+            else
+            {
+                <h3>@ViewBag.SeverityPrediction</h3>
+            }
         </div>
 
     </div>
