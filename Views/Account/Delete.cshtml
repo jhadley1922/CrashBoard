@@ -3,12 +3,22 @@
 
 @model Crash
 
-<h2>Delete Crash ID: @Model.CRASH_ID?</h2>
+<body>
 
-<form method="post" asp-action="Delete">
-    <button class="btn btn-danger" type="submit">Delete</button>
-    <a class="btn btn-secondary" asp-controller="Account" asp-action="Admin"
-       asp-route-severity="0" asp-route-pageNum="1" asp-route-searchString="">Cancel</a>
+    <div class="container py-5 px-5">
+        <div class="row justify-content-center" style="text-align:center">
+            <div class="col-lg-8 col-xxl-6">
+                <h2 class="fw-bolder mb-3">Delete Crash ID: @Model.CRASH_ID?</h2>
+                <form method="post" asp-action="Delete">
+                    <a class="btn btn-secondary" asp-controller="Account" asp-action="Admin"
+                       asp-route-severity="0" asp-route-pageNum="1" asp-route-searchString="">Cancel</a>
+                    <button class="btn btn-danger" type="submit">Delete</button>
 
-    <input hidden asp-for="CRASH_PK" />
-</form>
+                    <input hidden asp-for="CRASH_PK" />
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
