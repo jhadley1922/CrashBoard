@@ -1,5 +1,6 @@
 ﻿using CrashBoard.Models;
 using CrashBoard.Models.ViewModels;
+using Google.Authenticator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,8 +30,14 @@ namespace CrashBoard.Controllers
         {
             if (LoginCookieModel.UserId != null)
             {
+                IdentityUser user = userManager.Users.FirstOrDefault(x => x.Id == LoginCookieModel.UserId);
+
                 if (userManager.FindByIdAsync(LoginCookieModel.UserId) != null)
                 {
+                    if (user.TwoFactorEnabled && !LoginCookieModel.Authorized)
+                    {
+                        return View(new LoginModel { });
+                    }
                     var am = new AdminModel
                     {
                         severity = 0,
@@ -57,13 +64,19 @@ namespace CrashBoard.Controllers
 
                     if ((await signInManager.PasswordSignInAsync(user, lm.Password, false, false)).Succeeded)
                     {
+                        LoginCookieModel.UserId = user.Id;
+
+                        if (user.TwoFactorEnabled)
+                        {
+                            return RedirectToAction("Authorize");
+                        }
+                        LoginCookieModel.Authorized = true;
                         var am = new AdminModel
                         {
                             severity = 0,
                             pageNum = 1,
                             searchString = ""
                         };
-                        LoginCookieModel.UserId = user.Id;
                         return RedirectToAction("Admin", am);
                     }
                 }
@@ -76,6 +89,7 @@ namespace CrashBoard.Controllers
         {
             await signInManager.SignOutAsync();
             LoginCookieModel.UserId = null;
+            LoginCookieModel.Authorized = false;
 
             return View("Login");
         }
@@ -208,6 +222,42 @@ namespace CrashBoard.Controllers
         {
             repo.DeleteCrash(c);
             return View("DeleteConfirm");
+        }
+
+        public IActionResult AccountDetails()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Authorize()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Authorize(string inputCode)
+        {
+            IdentityUser user = userManager.Users.FirstOrDefault(x => x.Id == LoginCookieModel.UserId);
+            TwoFactorAuthenticator twoFactor = new TwoFactorAuthenticator();
+            bool isValid = twoFactor.ValidateTwoFactorPIN(TwoFactorKey(user), inputCode);
+            if (!isValid)
+            {
+                return Redirect("Login");
+            }
+            LoginCookieModel.Authorized = true;
+            var am = new AdminModel
+            {
+                severity = 0,
+                pageNum = 1,
+                searchString = ""
+            };
+            return RedirectToAction("Admin", am);
+        }
+
+        private static string TwoFactorKey(IdentityUser user)
+        {
+            return $"myverysecretkey+{user.Email}";
         }
     }
 }

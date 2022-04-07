@@ -8,5 +8,6 @@ namespace CrashBoard.Models.ViewModels
     public static class LoginCookieModel
     {
         public static string UserId { get; set; }
+        public static bool Authorized = false;
     }
 }

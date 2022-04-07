@@ -25,8 +25,9 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="CrashData" asp-route-severity="0" asp-route-pageNum="1" asp-route-searchString="">Crashes</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Admin</a></li>
-                    @if (LoginCookieModel.UserId != null)
+                    @if (LoginCookieModel.UserId != null && LoginCookieModel.Authorized)
                     {
+                        <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="AccountDetails">Account</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a></li>
                     }
                     @*<li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
