@@ -74,6 +74,7 @@ body {
     margin-bottom: 4px;
 }
 
+/*Custom label style for forms*/
 label {
     width: 265px;
     display: inline-block
