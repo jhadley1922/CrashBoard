@@ -1,116 +1,132 @@
-﻿@{
+﻿<!--Page View to Edit Crash Record-->
+@{
+    ViewData["Title"] = "Edit Crash Record";
 }
 
 @model Crash
 
-<h2>Edit Crash Record</h2>
+<body>
 
-<form method="post">
-    <div asp-validation-summary="All"></div>
+    <div class="container">
+        <div class="bg-light rounded-3 py-5 px-4 px-md5 mb-5 mt-5">
 
-    <input hidden asp-for="CRASH_PK" />
+            <h2 class="fw-bolder text-center">Edit Crash Record</h2>
 
-    <label asp-for="CRASH_ID">Crash ID: </label>
-    <input asp-for="CRASH_ID" /><br />
+            <!--Form-->
+            <form method="post">
 
-    <label asp-for="CRASH_DATETIME">Date and Time: </label>
-    <input type="datetime-local" asp-for="CRASH_DATETIME" /><br />
+                <!--Added to show validation errors-->
+                <div asp-validation-summary="All"></div>
 
-    <label asp-for="ROUTE">Route: </label>
-    <input asp-for="ROUTE" /><br />
+                <input hidden asp-for="CRASH_PK" />
 
-    <label asp-for="MILEPOINT">Milepoint: </label>
-    <input asp-for="MILEPOINT" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="CRASH_ID">Crash ID: </label>
+                <input class="form-control" asp-for="CRASH_ID" /><br />
 
-    <label asp-for="LAT_UTM_Y">Latitude: </label>
-    <input asp-for="LAT_UTM_Y" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="CRASH_DATETIME">Date and Time: </label>
+                <input class="form-control" type="datetime-local" asp-for="CRASH_DATETIME" /><br />
 
-    <label asp-for="LONG_UTM_X">Longitude: </label>
-    <input asp-for="LONG_UTM_X" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="ROUTE">Route: </label>
+                <input class="form-control" asp-for="ROUTE" /><br />
 
-    <label asp-for="MAIN_ROAD_NAME">Road: </label>
-    <input asp-for="MAIN_ROAD_NAME" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="MILEPOINT">Milepoint: </label>
+                <input class="form-control" asp-for="MILEPOINT" /><br />
 
-    <label asp-for="CityId">City: </label>
-    <select asp-for="CityId">
-        @foreach (City c in ViewBag.Cities)
-        {
-            <option value="@c.CITY_ID">@c.CITY_NAME</option>
-        }
-    </select><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="LAT_UTM_Y">Latitude: </label>
+                <input class="form-control" asp-for="LAT_UTM_Y" /><br />
 
-    <label asp-for="CountyId">County: </label>
-    <select asp-for="CountyId">
-        @foreach (County c in ViewBag.Counties)
-        {
-            <option value="@c.COUNTY_ID">@c.COUNTY_NAME</option>
-        }
-    </select><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="LONG_UTM_X">Longitude: </label>
+                <input class="form-control" asp-for="LONG_UTM_X" /><br />
 
-    <label asp-for="SeverityId">Severity: </label>
-    <select asp-for="SeverityId">
-        @foreach (Severity s in ViewBag.Severities)
-        {
-            <option value="@s.SEVERITY_ID">@s.SEVERITY_DESCRIPTION</option>
-        }
-    </select><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="MAIN_ROAD_NAME">Road: </label>
+                <input class="form-control" asp-for="MAIN_ROAD_NAME" /><br />
 
-    <label asp-for="WORK_ZONE_RELATED">Work Zone Related: </label>
-    <input  asp-for="WORK_ZONE_RELATED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="CityId">City: </label>
+                <select class="form-control" asp-for="CityId">
+                    @foreach (City c in ViewBag.Cities)
+                    {
+                        <option value="@c.CITY_ID">@c.CITY_NAME</option>
+                    }
+                </select><br />
 
-    <label asp-for="PEDESTRIAN_INVOLVED">Pedestrian Involved: </label>
-    <input asp-for="PEDESTRIAN_INVOLVED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="CountyId">County: </label>
+                <select class="form-control" asp-for="CountyId">
+                    @foreach (County c in ViewBag.Counties)
+                    {
+                        <option value="@c.COUNTY_ID">@c.COUNTY_NAME</option>
+                    }
+                </select><br />
 
-    <label asp-for="BICYCLIST_INVOLVED">Bicycle Involved: </label>
-    <input asp-for="BICYCLIST_INVOLVED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="SeverityId">Severity: </label>
+                <select class="form-control" asp-for="SeverityId">
+                    @foreach (Severity s in ViewBag.Severities)
+                    {
+                        <option value="@s.SEVERITY_ID">@s.SEVERITY_DESCRIPTION</option>
+                    }
+                </select><br />
 
-    <label asp-for="MOTORCYCLE_INVOLVED">Motorcycle Involved: </label>
-    <input asp-for="MOTORCYCLE_INVOLVED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="WORK_ZONE_RELATED">Work Zone Related: </label>
+                <input asp-for="WORK_ZONE_RELATED" /><br />
 
-    <label asp-for="IMPROPER_RESTRAINT">Improper Restraint: </label>
-    <input asp-for="IMPROPER_RESTRAINT" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="PEDESTRIAN_INVOLVED">Pedestrian Involved: </label>
+                <input asp-for="PEDESTRIAN_INVOLVED" /><br />
 
-    <label asp-for="UNRESTRAINED">Unrestrained: </label>
-    <input asp-for="UNRESTRAINED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="BICYCLIST_INVOLVED">Bicycle Involved: </label>
+                <input asp-for="BICYCLIST_INVOLVED" /><br />
 
-    <label asp-for="DUI">DUI: </label>
-    <input asp-for="DUI" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="MOTORCYCLE_INVOLVED">Motorcycle Involved: </label>
+                <input asp-for="MOTORCYCLE_INVOLVED" /><br />
 
-    <label asp-for="INTERSECTION_RELATED">Intersection Related: </label>
-    <input asp-for="INTERSECTION_RELATED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="IMPROPER_RESTRAINT">Improper Restraint: </label>
+                <input asp-for="IMPROPER_RESTRAINT" /><br />
 
-    <label asp-for="WILD_ANIMAL_RELATED">Wild Animal Related: </label>
-    <input asp-for="WILD_ANIMAL_RELATED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="UNRESTRAINED">Unrestrained: </label>
+                <input asp-for="UNRESTRAINED" /><br />
 
-    <label asp-for="DOMESTIC_ANIMAL_RELATED">Domestic Animal Related: </label>
-    <input asp-for="DOMESTIC_ANIMAL_RELATED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="DUI">DUI: </label>
+                <input asp-for="DUI" /><br />
 
-    <label asp-for="OVERTURN_ROLLOVER">Overturn Rollover: </label>
-    <input asp-for="OVERTURN_ROLLOVER" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="INTERSECTION_RELATED">Intersection Related: </label>
+                <input asp-for="INTERSECTION_RELATED" /><br />
 
-    <label asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED">Commercial Vehicle Involved: </label>
-    <input asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="WILD_ANIMAL_RELATED">Wild Animal Related: </label>
+                <input asp-for="WILD_ANIMAL_RELATED" /><br />
 
-    <label asp-for="TEENAGE_DRIVER_INVOLVED">Teenage Driver Involved: </label>
-    <input asp-for="TEENAGE_DRIVER_INVOLVED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="DOMESTIC_ANIMAL_RELATED">Domestic Animal Related: </label>
+                <input asp-for="DOMESTIC_ANIMAL_RELATED" /><br />
 
-    <label asp-for="OLDER_DRIVER_INVOLVED">Older Driver Involved: </label>
-    <input asp-for="OLDER_DRIVER_INVOLVED" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="OVERTURN_ROLLOVER">Overturn Rollover: </label>
+                <input asp-for="OVERTURN_ROLLOVER" /><br />
 
-    <label asp-for="NIGHT_DARK_CONDITION">Night/Dark Condition: </label>
-    <input asp-for="NIGHT_DARK_CONDITION" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED">Commercial Vehicle Involved: </label>
+                <input asp-for="COMMERCIAL_MOTOR_VEH_INVOLVED" /><br />
 
-    <label asp-for="SINGLE_VEHICLE">Single Vehicle: </label>
-    <input asp-for="SINGLE_VEHICLE" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="TEENAGE_DRIVER_INVOLVED">Teenage Driver Involved: </label>
+                <input asp-for="TEENAGE_DRIVER_INVOLVED" /><br />
 
-    <label asp-for="DISTRACTED_DRIVING">Distracted Driving: </label>
-    <input asp-for="DISTRACTED_DRIVING" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="OLDER_DRIVER_INVOLVED">Older Driver Involved: </label>
+                <input asp-for="OLDER_DRIVER_INVOLVED" /><br />
 
-    <label asp-for="DROWSY_DRIVING">Drowsy Driving: </label>
-    <input asp-for="DROWSY_DRIVING" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="NIGHT_DARK_CONDITION">Night/Dark Condition: </label>
+                <input asp-for="NIGHT_DARK_CONDITION" /><br />
 
-    <label asp-for="ROADWAY_DEPARTURE">Roadway Departure: </label>
-    <input asp-for="ROADWAY_DEPARTURE" /><br />
+                <label class="lead fw-normal text-muted mb-0" asp-for="SINGLE_VEHICLE">Single Vehicle: </label>
+                <input asp-for="SINGLE_VEHICLE" /><br />
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+                <label class="lead fw-normal text-muted mb-0" asp-for="DISTRACTED_DRIVING">Distracted Driving: </label>
+                <input asp-for="DISTRACTED_DRIVING" /><br />
+
+                <label class="lead fw-normal text-muted mb-0" asp-for="DROWSY_DRIVING">Drowsy Driving: </label>
+                <input asp-for="DROWSY_DRIVING" /><br />
+
+                <label class="lead fw-normal text-muted mb-0" asp-for="ROADWAY_DEPARTURE">Roadway Departure: </label>
+                <input asp-for="ROADWAY_DEPARTURE" /><br />
+
+                <br />
+                <button type="submit" class="btn btn-primary btn-lg" style="width:280px">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+</body>

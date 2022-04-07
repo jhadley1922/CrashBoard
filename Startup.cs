@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Amazon.SecretsManager;
 using Amazon;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.ML.OnnxRuntime;
 
 namespace CrashBoard
 {
@@ -34,11 +35,38 @@ namespace CrashBoard
             services.AddDbContext<CrashDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
             });
 
             services.AddDbContext<AppIdentityDBContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
+            });
+
+            services.AddScoped<ICrashRepository, EFCrashRepository>();
+
+            //enables HSTS??
+            //services.AddHsts(options =>
+            //{
+            //    options.Preload = true;
+            //    options.IncludeSubDomains = true;
+            //    options.MaxAge = TimeSpan.FromDays(365);
+            //});
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
+
+            //Password Properties -- these are the default
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false; //Apparently research now says to not enfore complexity requirements
+                options.Password.RequiredLength = 8; //8 is the reccommended length, reqs longer than that lead to repeating patterns
+                options.Password.RequiredUniqueChars = 5; //idk about this?
             });
 
             // Added this to enable cookies
@@ -50,30 +78,10 @@ namespace CrashBoard
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddScoped<ICrashRepository, EFCrashRepository>();
 
-            //enables HSTS??
-            //services.AddHsts(options =>
-            //{
-            //    options.Preload = true;
-            //    options.IncludeSubDomains = true;
-            //    options.MaxAge = TimeSpan.FromDays(365);
-            //});
-
-            //Password Properties -- these are the default
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Default Password settings.
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 14; //According to Microsoft, a minimum length of 14 is  best practice 
-                options.Password.RequiredUniqueChars = 5;
-            });
-
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDBContext>();
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("Models/severity_reg.onnx")
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
