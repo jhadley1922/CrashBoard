@@ -13,7 +13,7 @@ namespace CrashBoard.Models
         [Required]
         public int CRASH_PK { get; set; }
         public string? CRASH_ID { get; set; }
-        public DateTime? CRASH_DATETIME { get; set; }
+        public DateTime CRASH_DATETIME { get; set; }
         public string? ROUTE { get; set; }
         public double? MILEPOINT { get; set; }
         public double? LAT_UTM_Y { get; set; }
