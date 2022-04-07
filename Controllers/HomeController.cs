@@ -124,7 +124,17 @@ namespace CrashBoard.Controllers
             return View();
         }
 
-        public IActionResult Solution()
+        public IActionResult Solutions()
+        {
+            return View();
+        }
+
+        public IActionResult Analysis()
+        {
+            return View();
+        }
+
+        public IActionResult CrashSeverityPredictor()
         {
             return View();
         }
