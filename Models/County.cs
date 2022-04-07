@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models
 {
+    //Model for County table
     public class County
     {
         [Key]

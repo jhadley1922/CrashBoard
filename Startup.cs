@@ -139,8 +139,6 @@ namespace CrashBoard
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            IdentitySeedData.EnsurePopulated(app);
-
         }
     }
 }

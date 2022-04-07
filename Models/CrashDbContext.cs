@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models
 {
+    //Sets up DbSets from database
     public class CrashDbContext : DbContext
     {
         public CrashDbContext()

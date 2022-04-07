@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models.ViewModels
 {
+    // Bundles info passed to admin page
     public class AdminModel
     {
         public int severity { get; set; }

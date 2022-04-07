@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CrashBoard.Models
 {
+    //Sets up identity database
     public class AppIdentityDBContext : IdentityDbContext<IdentityUser>
     {
         public AppIdentityDBContext(DbContextOptions options) : base(options)

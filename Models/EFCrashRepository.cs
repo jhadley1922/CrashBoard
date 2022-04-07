@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models
 {
+    //Makes repository of the data
     public class EFCrashRepository : ICrashRepository
     {
         private CrashDbContext context { get; set; }
