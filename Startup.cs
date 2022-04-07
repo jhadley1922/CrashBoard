@@ -32,6 +32,16 @@ namespace CrashBoard
         {
             services.AddControllersWithViews();
 
+            // Cookies
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddDbContext<CrashDbContext>(options =>
             {
                 // AWS production
@@ -67,16 +77,6 @@ namespace CrashBoard
                 options.Password.RequireUppercase = false; //Apparently research now says to not enfore complexity requirements
                 options.Password.RequiredLength = 8; //8 is the reccommended length, reqs longer than that lead to repeating patterns
                 options.Password.RequiredUniqueChars = 5; //idk about this?
-            });
-
-            // Added this to enable cookies
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential 
-                // cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                // requires using Microsoft.AspNetCore.Http;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddSingleton<InferenceSession>(
