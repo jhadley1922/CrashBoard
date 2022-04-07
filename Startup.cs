@@ -33,14 +33,14 @@ namespace CrashBoard
 
             services.AddDbContext<CrashDbContext>(options =>
             {
-                //options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
-                options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
+                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
             });
 
             services.AddDbContext<AppIdentityDBContext>(options =>
             {
-                //options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
-                options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
+                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
             });
 
             // Added this to enable cookies
