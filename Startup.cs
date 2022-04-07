@@ -34,13 +34,21 @@ namespace CrashBoard
 
             services.AddDbContext<CrashDbContext>(options =>
             {
+                // AWS production
+                //options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                //appsettings.json
                 options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //local environment
                 //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
             });
 
             services.AddDbContext<AppIdentityDBContext>(options =>
             {
+                // AWS production
+                //options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                //appsettings.json
                 options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //local environment
                 //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
             });
 
