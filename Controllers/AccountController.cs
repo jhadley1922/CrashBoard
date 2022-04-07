@@ -25,6 +25,7 @@ namespace CrashBoard.Controllers
             repo = temp;
         }
 
+        // Get Login page, checks if user is logged in already
         [HttpGet]
         public IActionResult Login()
         {
@@ -51,6 +52,7 @@ namespace CrashBoard.Controllers
             return View(new LoginModel { });
         }
 
+        // Login post that checks if the user needs to be authorized after logging in with correct credentials
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel lm)
         {
@@ -85,6 +87,7 @@ namespace CrashBoard.Controllers
             return View(lm);
         }
 
+        //Logs out user
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -93,6 +96,7 @@ namespace CrashBoard.Controllers
 
             return View("Login");
         }
+        //Gets Admin page, allows search
         public IActionResult Admin(int severity, int pageNum, string searchString)
         {
             int pageSize = 50;
@@ -177,6 +181,7 @@ namespace CrashBoard.Controllers
             return View(cvm);
         }
 
+        //Gets Create page
         [HttpGet]
         public IActionResult Create()
         {
@@ -186,6 +191,7 @@ namespace CrashBoard.Controllers
             return View();
         }
 
+        //Creates crash
         [HttpPost]
         public IActionResult Create(Crash c)
         {
@@ -193,6 +199,7 @@ namespace CrashBoard.Controllers
             return View("CreateConfirm");
         }
 
+        // Gets edit page
         [HttpGet]
         public IActionResult Edit(int crashpk)
         {
@@ -203,6 +210,7 @@ namespace CrashBoard.Controllers
             return View(crash);
         }
 
+        // Edits a crash
         [HttpPost]
         public IActionResult Edit(Crash c)
         {
@@ -210,6 +218,7 @@ namespace CrashBoard.Controllers
             return View("EditConfirm");
         }
 
+        // Gets Delete page
         [HttpGet]
         public IActionResult Delete(int crashpk)
         {
@@ -217,6 +226,7 @@ namespace CrashBoard.Controllers
             return View(crash);
         }
 
+        // Deletes a crash
         [HttpPost]
         public IActionResult Delete(Crash c)
         {
@@ -224,17 +234,14 @@ namespace CrashBoard.Controllers
             return View("DeleteConfirm");
         }
 
-        public IActionResult AccountDetails()
-        {
-            return View();
-        }
-
+        // Gets MFA authorize page
         [HttpGet]
         public IActionResult Authorize()
         {
             return View();
         }
 
+        // Authorizes a user, returns to login page if failed
         [HttpPost]
         public IActionResult Authorize(string inputCode)
         {
@@ -255,6 +262,7 @@ namespace CrashBoard.Controllers
             return RedirectToAction("Admin", am);
         }
 
+        // MFA key
         private static string TwoFactorKey(IdentityUser user)
         {
             return $"myverysecretkey+{user.Email}";

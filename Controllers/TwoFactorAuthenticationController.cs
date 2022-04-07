@@ -21,6 +21,7 @@ namespace CrashBoard.Controllers
             userManager = um;
         }
 
+        //Gets enable MFA page
         [HttpGet]
         public ActionResult Enable()
         {
@@ -33,11 +34,13 @@ namespace CrashBoard.Controllers
             return View();
         }
 
+        // MFA key
         private static string TwoFactorKey(IdentityUser user)
         {
             return $"myverysecretkey+{user.Email}";
         }
 
+        //Enables MFA for a user
         [HttpPost]
         public ActionResult Enable(string inputCode)
         {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models
 {
+    //Crash repository interface
     public interface ICrashRepository
     {
         IQueryable<Crash> Crashes { get; }

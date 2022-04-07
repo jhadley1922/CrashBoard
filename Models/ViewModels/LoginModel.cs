@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models.ViewModels
 {
+    //Model for login info
     public class LoginModel
     {
         [Required]

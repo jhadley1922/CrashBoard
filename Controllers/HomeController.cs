@@ -20,11 +20,14 @@ namespace CrashBoard.Controllers
             repo = temp;
         }
 
+
+        // Gets index page
         public IActionResult Index()
         {
             return View();
         }
 
+        //Gets CrashData page, displays crashes, can filter and search page
         public IActionResult CrashData(int severity, int pageNum, string searchString)
         {
             int pageSize = 50;
@@ -109,6 +112,7 @@ namespace CrashBoard.Controllers
             return View(cvm);
         }
 
+        // Gets ccrash details
         public IActionResult CrashDetails(int crashpk)
         {
             var crash = repo.Crashes
@@ -119,11 +123,13 @@ namespace CrashBoard.Controllers
             return View(crash);
         }
 
+        //Gets Privacy page
         public IActionResult Privacy()
         {
             return View();
         }
 
+        //Gets solution page
         public IActionResult Solution()
         {
             return View();

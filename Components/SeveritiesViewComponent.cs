@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Components
 {
+    // Class that builds the severities filter on CrashData page
     public class SeveritiesViewComponent : ViewComponent
     {
         private ICrashRepository repo { get; set; }

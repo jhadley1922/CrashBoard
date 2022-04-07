@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models
 {
+    //Model for Crash table
     public class Crash
     {
         [Key]

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace CrashBoard.Models.ViewModels
 {
+    //Cookie information used for login and authorization
     public static class LoginCookieModel
     {
         public static string UserId { get; set; }
