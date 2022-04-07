@@ -45,21 +45,35 @@ namespace CrashBoard
             services.AddDbContext<CrashDbContext>(options =>
             {
                 // AWS production
-                //options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                if (Environment.GetEnvironmentVariable("RDS_HOST") != null)
+                {
+                    // production
+                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                }
+                else
+                {
+                    // local
+                    options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
+                }
                 //appsettings.json
-                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
-                //local environment
-                //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
+                //options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
             });
 
             services.AddDbContext<AppIdentityDBContext>(options =>
             {
                 // AWS production
-                //options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                if (Environment.GetEnvironmentVariable("RDS_HOST") != null)
+                {
+                    // production
+                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                }
+                else
+                {
+                    // local
+                    options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
+                }
                 //appsettings.json
-                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
-                //local environment
-                //options.UseMySql(Configuration.GetConnectionString("RDSConnection"));
+                //options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
             });
 
             services.AddScoped<ICrashRepository, EFCrashRepository>();
