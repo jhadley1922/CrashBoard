@@ -38,6 +38,7 @@
 
                 <label class="lead fw-normal text-muted mb-0" asp-for="CityId">City: </label>
                 <select class="form-control" asp-for="CityId">
+                    <option value="">--Select a City--</option>
                     @foreach (City c in ViewBag.Cities)
                     {
                         <option value="@c.CITY_ID">@c.CITY_NAME</option>
@@ -46,6 +47,7 @@
 
                 <label class="lead fw-normal text-muted mb-0" asp-for="CountyId">County: </label>
                 <select class="form-control" asp-for="CountyId">
+                    <option value="">--Select a County--</option>
                     @foreach (County c in ViewBag.Counties)
                     {
                         <option value="@c.COUNTY_ID">@c.COUNTY_NAME</option>
@@ -54,6 +56,7 @@
 
                 <label class="lead fw-normal text-muted mb-0" asp-for="SeverityId">Severity: </label>
                 <select class="form-control" asp-for="SeverityId">
+                    <option value="">--Select a Severity--</option>
                     @foreach (Severity s in ViewBag.Severities)
                     {
                         <option value="@s.SEVERITY_ID">@s.SEVERITY_DESCRIPTION</option>
