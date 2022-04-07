@@ -2,10 +2,23 @@
     ViewData["Title"] = "Authorization";
 }
 
+<!--Authorization Form-->
+
 <body>
-    <h1>Authorize</h1>
-    <form method="post">
-        Input security code: <input name="inputCode" /><br />
-        <input type="submit" />
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow rounded-3 my-5">
+                    <div class="card-body p-4 p-sm-5" style="text-align:center">
+                        <h5 class="card-title text-center mb-5 fw-bold fs-5">Authorize</h5>
+                        <form method="post">
+                            @*Input security code:*@
+                            <input class="form-control" placeholder="Security Code" name="inputCode" /><br />
+                            <input class="btn btn-primary btn-login text-uppercase fw-bold d-grid" type="submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
