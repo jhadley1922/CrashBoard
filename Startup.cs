@@ -54,14 +54,6 @@ namespace CrashBoard
 
             services.AddScoped<ICrashRepository, EFCrashRepository>();
 
-            //enables HSTS??
-            //services.AddHsts(options =>
-            //{
-            //    options.Preload = true;
-            //    options.IncludeSubDomains = true;
-            //    options.MaxAge = TimeSpan.FromDays(365);
-            //});
-
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDBContext>();
 
@@ -103,11 +95,10 @@ namespace CrashBoard
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains().Preload());
+                //app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains().Preload());
             }
 
-            app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains().Preload());
-            //app.UseHsts();
+            app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains());
             app.UseHttpsRedirection();
 
             //content security policy (CSP) HTTP header 
