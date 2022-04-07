@@ -129,7 +129,7 @@ namespace CrashBoard.Controllers
             return View();
         }
 
-        public IActionResult Solutions() 
+        public IActionResult Recommendations() 
         {
             return View();
         }
