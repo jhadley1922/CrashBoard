@@ -125,6 +125,10 @@ namespace CrashBoard.Controllers
             {
                 severity_prediction = (int)Math.Round(prediction.PredictedValue);
             }
+            if (prediction.PredictedValue > 5)
+            {
+                severity_prediction = 5;
+            }
 
             Severity severity = repo.Severities.FirstOrDefault(x => x.SEVERITY_ID == severity_prediction);
             ViewBag.SeverityPrediction = severity.SEVERITY_DESCRIPTION;

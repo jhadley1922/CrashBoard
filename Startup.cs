@@ -88,7 +88,7 @@ namespace CrashBoard
             });
 
             services.AddSingleton<InferenceSession>(
-              new InferenceSession("wwwroot/partial_severity_reg_new.onnx")
+              new InferenceSession("wwwroot/best_severity_reg.onnx")
             );
         }
 
