@@ -37,4 +37,8 @@
   <ItemGroup>
     <None Remove="NWebsec.AspNetCore.Middleware" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\partial_severity_reg_new.onnx" />
+  </ItemGroup>
 </Project>
