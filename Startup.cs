@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Amazon.SecretsManager;
 using Amazon;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.ML.OnnxRuntime;
 
 namespace CrashBoard
 {
@@ -76,6 +77,10 @@ namespace CrashBoard
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDBContext>();
+
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("Models/severity_reg.onnx")
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
