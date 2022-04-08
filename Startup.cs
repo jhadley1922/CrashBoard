@@ -44,36 +44,36 @@ namespace CrashBoard
 
             services.AddDbContext<CrashDbContext>(options =>
             {
-                //// AWS production
-                //if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
-                //{
-                //    // production
-                //    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
-                //}
-                //else
-                //{
-                //    // local
-                //    options.UseMySql(Configuration["RDSConnection"]);
-                //}
+                // AWS production
+                if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
+                {
+                    // production
+                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
+                }
+                else
+                {
+                    //local
+                    options.UseMySql(Configuration["ConnString"]);
+                }
                 //appsettings.json
-                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
             });
 
             services.AddDbContext<AppIdentityDBContext>(options =>
             {
-                //// AWS production
-                //if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
-                //{
-                //    // production
-                //    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
-                //}
-                //else
-                //{
-                //    // local
-                //    options.UseMySql(Configuration["RDSConnection"]);
-                //}
+                // AWS production
+                if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
+                {
+                    // production
+                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
+                }
+                else
+                {
+                    //local
+                    options.UseMySql(Configuration["ConnString"]);
+                }
                 //appsettings.json
-                options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
+                //options.UseMySql(Configuration["ConnectionStrings:RDSConnection"]);
             });
 
             services.AddScoped<ICrashRepository, EFCrashRepository>();
