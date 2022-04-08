@@ -331,6 +331,58 @@ namespace CrashBoard.Controllers
             }
             ViewBag.FatalFeatureCounts = JsonConvert.SerializeObject(FatalFeatureCounts);
 
+            // Crash Count by City
+            List<DataPoint> MonthCount = new List<DataPoint>();
+            string[] MonthPath = { wwwPath, "csv", "month_count.csv" };
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(Path.Combine(MonthPath));
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        MonthCount.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.MonthCount = JsonConvert.SerializeObject(MonthCount);
+
+            // Fatal Crash Count by City
+            List<DataPoint> FatalMonthCount = new List<DataPoint>();
+            string[] FatalMonthPath = { wwwPath, "csv", "month_fatal_count.csv" };
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(Path.Combine(FatalMonthPath));
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        FatalMonthCount.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.FatalMonthCount = JsonConvert.SerializeObject(FatalMonthCount);
+
             return View();
         }
 

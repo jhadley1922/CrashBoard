@@ -103,16 +103,44 @@
 					dataPoints:  @Html.Raw(ViewBag.FatalFeatureCounts),
 			}]
 			});
-            FatalFeatureCountsChart.render();
+			FatalFeatureCountsChart.render();
+
+			var MonthCountChart = new CanvasJS.Chart("monthCountContainer", {
+				animationEnabled: true,
+				theme: "light1", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Crashes by Month"
+				},
+				data: [{
+					type: "spline",
+					dataPoints:  @Html.Raw(ViewBag.MonthCount),
+				}]
+			});
+			MonthCountChart.render();
+
+			var FatalMonthCountChart = new CanvasJS.Chart("fatalMonthCountContainer", {
+				animationEnabled: true,
+				theme: "dark1", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Fatal Crashes by Month"
+				},
+				data: [{
+					type: "spline",
+					dataPoints:  @Html.Raw(ViewBag.FatalMonthCount),
+			}]
+			});
+            FatalMonthCountChart.render();
 		}
     </script>
 }
 
 <div class="container text-center">
-	<br />
+    <br />
     <h1>Crash Analysis</h1>
     <p>An overview of how, where, and why crashes are occurring and resulting in fatalities in Utah.</p>
-	<br />
+    <br />
 
     <div class="container-fluid">
         <div class="row" style="height: 350px;">
@@ -120,7 +148,50 @@
             <div id="severityCountsContainer" class="col col-8"></div>
             <div class="col col-2"></div>
         </div>
+        <br />
+        <div class="row" style="height: 50px;">
+            <div class="col col-2"></div>
+            <div class="col col-8">
+                <p>The vast majority of accidents involve no injuries. However, these  analyses can provide insights into reducing both overall crashes and fatalities.</p>
+            </div>
+            <div class="col col-2"></div>
+        </div>
     </div>
+    <br /><br />
+    <div class="container-fluid">
+        <div class="row" style="height: 350px;">
+            <div id="featureCountsContainer" class="col col-5"></div>
+            <div class="col col-2"></div>
+            <div id="fatalFeatureCountsContainer" class="col col-5"></div>
+        </div>
+        <br />
+        <div class="row" style="height: 50px;">
+            <div class="col col-2"></div>
+            <div class="col col-8">
+                <p>Here, we can see that while intersections are the most common factor in overall crashes, they play a much smaller role in fatalities, where single vehicle accidents are most common.</p>
+            </div>
+            <div class="col col-2"></div>
+        </div>
+
+    </div>
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="row" style="height: 350px;">
+            <div id="monthCountContainer" class="col col-5"></div>
+            <div class="col col-2"></div>
+            <div id="fatalMonthCountContainer" class="col col-5"></div>
+        </div>
+        <br />
+        <div class="row" style="height: 50px;">
+            <div class="col col-2"></div>
+            <div class="col col-8">
+                <p>When comparing trends across the year, there is another distinction made between crashes and related fatalities. General crashes increase in the winter months, at the same time that overall fatalities decrease.</p>
+            </div>
+            <div class="col col-2"></div>
+        </div>
+    </div>
+    <br />
     <br />
     <div class="container-fluid">
         <div class="row" style="height: 350px;">
@@ -133,17 +204,18 @@
     <div class="container-fluid">
         <div class="row" style="height: 500px;">
             <div id="cityCountsContainer" class="col col-5"></div>
-			<div class="col col-2"></div>
+            <div class="col col-2"></div>
             <div id="fatalCityCountsContainer" class="col col-5"></div>
         </div>
-    </div>
-    <br />
-    <div class="container-fluid">
-        <div class="row" style="height: 350px;">
-            <div id="featureCountsContainer" class="col col-5"></div>
+        <br />
+        <div class="row" style="height: 50px;">
             <div class="col col-2"></div>
-            <div id="fatalFeatureCountsContainer" class="col col-5"></div>
+            <div class="col col-8">
+                <p>Lastly, while it seems that most crashes occur in Salt Lake City when comparing counties, the cities charts indicate that more fatalities are actually outside of city territory. This category is spread across all counties. The "Fatal Crashes by City" chart provides further insight into the nature of most fatal crashes in Utah.</p>
+            </div>
+            <div class="col col-2"></div>
         </div>
+        <br /><br />
     </div>
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
