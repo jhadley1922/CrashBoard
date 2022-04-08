@@ -3,77 +3,146 @@
 }
 
 @section Head{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-window.onload = function () {
+		window.onload = function () {
 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light2", // "light1", "dark1", "dark2"
-	exportEnabled: true,
-	title: {
-		text: "2019 Crashes by County"
-	},
-	data: [{
-		type: "column",
-		dataPoints:  @Html.Raw(ViewBag.DataPoints)
-	}]
-});
-chart.render();
+			var severityCountsChart = new CanvasJS.Chart("severityCountsContainer", {
+			animationEnabled: true,
+			theme: "light 1", // "light1", "dark1", "dark2"
+			exportEnabled: true,
+			title: {
+				text: "Crashes by Severity"
+			},
+			data: [{
+				type: "column",
+				dataPoints:  @Html.Raw(ViewBag.SeverityCounts)
+			}]
+			});
+			severityCountsChart.render();
 
-}
+
+			var countyCountChart = new CanvasJS.Chart("countyCountsContainer", {
+				animationEnabled: true,
+				theme: "light2", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Crashes by County"
+				},
+				data: [{
+					type: "column",
+					dataPoints:  @Html.Raw(ViewBag.CountyCounts)
+			}]
+			});
+			countyCountChart.render();
+
+			var fatalCountyCountChart = new CanvasJS.Chart("fatalCountyCountsContainer", {
+				animationEnabled: true,
+				theme: "dark2", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Fatal Crashes by County"
+				},
+				data: [{
+					type: "column",
+					dataPoints:  @Html.Raw(ViewBag.FatalCountyCounts)
+			}]
+			});
+			fatalCountyCountChart.render();
+
+			var cityCountChart = new CanvasJS.Chart("cityCountsContainer", {
+				animationEnabled: true,
+				theme: "light2", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Crashes by City"
+				},
+				data: [{
+					type: "bar",
+					dataPoints:  @Html.Raw(ViewBag.CityCounts)
+			}]
+			});
+			cityCountChart.render();
+
+			var fatalCityCountChart = new CanvasJS.Chart("fatalCityCountsContainer", {
+				animationEnabled: true,
+				theme: "dark2", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Fatal Crashes by City"
+				},
+				data: [{
+					type: "bar",
+					dataPoints:  @Html.Raw(ViewBag.FatalCityCounts)
+			}]
+			});
+			fatalCityCountChart.render();
+
+			var FeatureCountsChart = new CanvasJS.Chart("featureCountsContainer", {
+				animationEnabled: true,
+				theme: "light1", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Common Crash Features"
+				},
+				data: [{
+					type: "column",
+					dataPoints:  @Html.Raw(ViewBag.FeatureCounts)
+			}]
+			});
+			FeatureCountsChart.render();
+
+			var FatalFeatureCountsChart = new CanvasJS.Chart("fatalFeatureCountsContainer", {
+				animationEnabled: true,
+				theme: "dark1", // "light1", "dark1", "dark2"
+				exportEnabled: true,
+				title: {
+					text: "Common Fatal Crash Features"
+				},
+				data: [{
+					type: "column",
+					dataPoints:  @Html.Raw(ViewBag.FatalFeatureCounts)
+			}]
+			});
+            FatalFeatureCountsChart.render();
+		}
     </script>
 }
 
-<div class="container">
+<div class="container text-center">
 
-    <h2>Analysis home page</h2>
+    <h2>Crash Analysis</h2>
+    <p>Use these charts to get an overview of how, where, and why crashes are occurring and resulting in fatalities in Utah.</p>
 
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div class="container-fluid">
+        <div class="row" style="height: 350px;">
+            <div class="col col-2"></div>
+            <div id="severityCountsContainer" class="col col-8"></div>
+            <div class="col col-2"></div>
+        </div>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <div class="row" style="height: 350px;">
+            <div id="countyCountsContainer" class="col col-6"></div>
+            <div id="fatalCountyCountsContainer" class="col col-6"></div>
+        </div>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <div class="row" style="height: 500px;">
+            <div id="cityCountsContainer" class="col col-6"></div>
+            <div id="fatalCityCountsContainer" class="col col-6"></div>
+        </div>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <div class="row" style="height: 350px;">
+            <div id="featureCountsContainer" class="col col-6"></div>
+            <div id="fatalFeatureCountsContainer" class="col col-6"></div>
+        </div>
+    </div>
+
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-
-    <canvas id="myChart" width="100%" height="400px"></canvas>
-    <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-
-
-
-
 
 </div>

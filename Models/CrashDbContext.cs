@@ -21,7 +21,5 @@ namespace CrashBoard.Models
         public DbSet<County> Counties { get; set; }
         public DbSet<Severity> Severities { get; set; }
 
-        public List<DataPoint> CountyCounts = new List<DataPoint>();
-
     }
 }

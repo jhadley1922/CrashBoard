@@ -6,9 +6,13 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using LumenWorks.Framework.IO.Csv;
+using System.Data;
+using System.IO;
 
 namespace CrashBoard.Controllers
 {
@@ -137,8 +141,181 @@ namespace CrashBoard.Controllers
 
         public IActionResult Analysis()
         {
+            // Crash Count per countyy
+            List<DataPoint> CountyCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            string csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_County_Counts.csv");
+            //Execute a loop over the rows.
+            int i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        CountyCounts.Add(new DataPoint(cells[0], count));
+                    }
+                }
 
-            ViewBag.DataPoints = JsonConvert.SerializeObject(repo.CountyCounts);
+            }
+            ViewBag.CountyCounts = JsonConvert.SerializeObject(CountyCounts);
+
+
+            // Fatal Crash Count per countyy
+            List<DataPoint> FatalCountyCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_Fatal_County_Counts.csv");
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        FatalCountyCounts.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.FatalCountyCounts = JsonConvert.SerializeObject(FatalCountyCounts);
+
+            // Crash Count by severity
+            List<DataPoint> SeverityCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\severity_counts_df.csv");
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        SeverityCounts.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.SeverityCounts = JsonConvert.SerializeObject(SeverityCounts);
+
+            // Crash Count by City
+            List<DataPoint> CityCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_city_counts_df.csv");
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        CityCounts.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.CityCounts = JsonConvert.SerializeObject(CityCounts);
+
+            // Fatal Crash Count by City
+            List<DataPoint> FatalCityCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_fatal_city_counts_df.csv");
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        FatalCityCounts.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.FatalCityCounts = JsonConvert.SerializeObject(FatalCityCounts);
+
+            // Crash Count by Feature
+            List<DataPoint> FeatureCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\10_feature_counts.csv");
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[2]);
+                        FeatureCounts.Add(new DataPoint(cells[1], count));
+                    }
+                }
+
+            }
+            ViewBag.FeatureCounts = JsonConvert.SerializeObject(FeatureCounts);
+
+            // Fatal Crash Count by Feature
+            List<DataPoint> FatalFeatureCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\10_fatal_feature_counts.csv");
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[2]);
+                        FatalFeatureCounts.Add(new DataPoint(cells[1], count));
+                    }
+                }
+
+            }
+            ViewBag.FatalFeatureCounts = JsonConvert.SerializeObject(FatalFeatureCounts);
 
             return View();
         }

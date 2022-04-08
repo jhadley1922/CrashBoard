@@ -9,7 +9,7 @@ namespace CrashBoard.Models
     [DataContract]
     public class DataPoint
     {
-		public DataPoint(string label, double y)
+		public DataPoint(string label, int y)
 		{
 			this.Label = label;
 			this.Y = y;
@@ -21,6 +21,6 @@ namespace CrashBoard.Models
 
 		//Explicitly setting the name to be used while serializing to JSON.
 		[DataMember(Name = "y")]
-		public Nullable<double> Y = null;
+		public Nullable<int> Y = null;
 	}
 }
