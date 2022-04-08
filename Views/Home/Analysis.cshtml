@@ -12,7 +12,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	theme: "light2", // "light1", "dark1", "dark2"
 	exportEnabled: true,
 	title: {
-		text: "2020 Crashes by County"
+		text: "2019 Crashes by County"
 	},
 	data: [{
 		type: "column",
@@ -33,7 +33,7 @@ chart.render();
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <canvas id="myChart" width="100%" height="400px"></canvas>
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {

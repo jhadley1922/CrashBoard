@@ -12,7 +12,7 @@ namespace CrashBoard.Models
     {
         public CrashDbContext()
         {
-
+            
         }
         public CrashDbContext(DbContextOptions<CrashDbContext> options) : base(options) { }
 
@@ -20,5 +20,8 @@ namespace CrashBoard.Models
         public DbSet<City> Cities { get; set; }
         public DbSet<County> Counties { get; set; }
         public DbSet<Severity> Severities { get; set; }
+
+        public List<DataPoint> CountyCounts = new List<DataPoint>();
+
     }
 }

@@ -137,23 +137,9 @@ namespace CrashBoard.Controllers
 
         public IActionResult Analysis()
         {
-            List<DataPoint> dataPoints = new List<DataPoint>();
-            var crashes = repo.Crashes.Where(x => x.CRASH_DATETIME.Year > 2018);
 
-            foreach(County county in repo.Counties.ToList())
-            {
-                var count = crashes.Count(x => x.CountyId == county.COUNTY_ID);
-                dataPoints.Add(new DataPoint(county.COUNTY_NAME, count));
-            }
-            dataPoints.OrderBy<>
+            ViewBag.DataPoints = JsonConvert.SerializeObject(repo.CountyCounts);
 
-            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
-
-            return View();
-        }
-
-        public IActionResult CrashSeverityPredictor()
-        {
             return View();
         }
     }

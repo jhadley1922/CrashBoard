@@ -14,6 +14,9 @@ namespace CrashBoard.Models
         public EFCrashRepository(CrashDbContext cc)
         {
             context = cc;
+
+            GetCountyCounts();
+
         }
         public IQueryable<Crash> Crashes => context.Crashes;
 
@@ -22,6 +25,14 @@ namespace CrashBoard.Models
         public IQueryable<County> Counties => context.Counties;
 
         public IQueryable<Severity> Severities => context.Severities;
+
+        public List<DataPoint> CountyCounts => context.CountyCounts;
+
+        public void GetCountyCounts()
+        {
+             CountyCounts.Add(new DataPoint("Salt Lake", 5));
+
+        }
 
         public void CreateCrash(Crash c)
         {
