@@ -3,6 +3,7 @@ using CrashBoard.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -136,6 +137,13 @@ namespace CrashBoard.Controllers
 
         public IActionResult Analysis()
         {
+            //var cities = repo.Cities.ToList();
+            //ViewBag.Cities = cities;
+            //var counts = new List<int>();
+            //foreach (City city in cities) {
+            //    counts.Add(1/*repo.Crashes.Count(x => x.CityId == city.CITY_ID)*/);
+            //}
+            //ViewBag.CityCounts = counts;
             return View();
         }
 
