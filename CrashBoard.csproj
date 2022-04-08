@@ -39,6 +39,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Models\csv\10_fatal_feature_counts.csv" />
+    <Content Include="Models\csv\10_feature_counts.csv" />
+    <Content Include="Models\csv\20_city_counts_df.csv" />
+    <Content Include="Models\csv\20_county_counts.csv" />
+    <Content Include="Models\csv\20_fatal_city_counts_df.csv" />
+    <Content Include="Models\csv\20_fatal_county_counts.csv" />
+    <Content Include="Models\csv\severity_counts_df.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\partial_severity_reg_new.onnx" />
   </ItemGroup>
 </Project>

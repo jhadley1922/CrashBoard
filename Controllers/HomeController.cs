@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LumenWorks.Framework.IO.Csv;
-using System.Data;
 using System.IO;
 
 namespace CrashBoard.Controllers
@@ -144,7 +143,7 @@ namespace CrashBoard.Controllers
             // Crash Count per countyy
             List<DataPoint> CountyCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            string csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_County_Counts.csv");
+            string csvData = System.IO.File.ReadAllText(@"Models\csv\20_County_Counts.csv");
             //Execute a loop over the rows.
             int i = 1;
             foreach (string row in csvData.Split("\n"))
@@ -170,7 +169,7 @@ namespace CrashBoard.Controllers
             // Fatal Crash Count per countyy
             List<DataPoint> FatalCountyCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_Fatal_County_Counts.csv");
+            csvData = System.IO.File.ReadAllText(@"Models\csv\20_Fatal_County_Counts.csv");
             //Execute a loop over the rows.
             i = 1;
             foreach (string row in csvData.Split("\n"))
@@ -195,7 +194,7 @@ namespace CrashBoard.Controllers
             // Crash Count by severity
             List<DataPoint> SeverityCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\severity_counts_df.csv");
+            csvData = System.IO.File.ReadAllText(@"Models\csv\severity_counts_df.csv");
             //Execute a loop over the rows.
             i = 1;
             foreach (string row in csvData.Split("\n"))
@@ -220,7 +219,7 @@ namespace CrashBoard.Controllers
             // Crash Count by City
             List<DataPoint> CityCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_city_counts_df.csv");
+            csvData = System.IO.File.ReadAllText(@"Models\csv\20_city_counts_df.csv");
             //Execute a loop over the rows.
             i = 1;
             foreach (string row in csvData.Split("\n"))
@@ -245,7 +244,7 @@ namespace CrashBoard.Controllers
             // Fatal Crash Count by City
             List<DataPoint> FatalCityCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\20_fatal_city_counts_df.csv");
+            csvData = System.IO.File.ReadAllText(@"Models\csv\20_fatal_city_counts_df.csv");
             //Execute a loop over the rows.
             i = 1;
             foreach (string row in csvData.Split("\n"))
@@ -270,7 +269,7 @@ namespace CrashBoard.Controllers
             // Crash Count by Feature
             List<DataPoint> FeatureCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\10_feature_counts.csv");
+            csvData = System.IO.File.ReadAllText(@"Models\csv\10_feature_counts.csv");
             //Execute a loop over the rows.
             i = 1;
             foreach (string row in csvData.Split("\n"))
@@ -295,7 +294,7 @@ namespace CrashBoard.Controllers
             // Fatal Crash Count by Feature
             List<DataPoint> FatalFeatureCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            csvData = System.IO.File.ReadAllText(@"wwwroot\csv\10_fatal_feature_counts.csv");
+            csvData = System.IO.File.ReadAllText(@"Models\csv\10_fatal_feature_counts.csv");
             //Execute a loop over the rows.
             i = 1;
             foreach (string row in csvData.Split("\n"))
