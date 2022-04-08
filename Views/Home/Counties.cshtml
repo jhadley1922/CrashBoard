@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["title"] = "Counties";
+}
+
+<div class="container">
+    <h1 class="h1">Counties</h1>
+    <p>Select a county for its specific crash data.</p>
+    <div class="row">
+        <div class="col col-4">
+            <div class="m-2">
+                <img src="~/img/utah_population.jpg" style="width:100%"/>
+            </div>
+        </div>
+        <div class="col-2"></div>
+        <div class="col col-6">
+
+            @foreach (County county in ViewBag.Counties)
+            {
+                <a class="btn btn-block btn-outline-info" asp-controller="Home" asp-action="County" asp-route-countyId="@county.COUNTY_ID">@county.COUNTY_NAME</a>
+            }
+        </div>
+    </div>
+</div>

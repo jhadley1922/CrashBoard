@@ -333,5 +333,132 @@ namespace CrashBoard.Controllers
 
             return View();
         }
+
+        public IActionResult Counties()
+        {
+            ViewBag.Counties = repo.Counties.ToList();
+            return View();
+        }
+
+        public IActionResult County(int countyId)
+        {
+
+            var County = repo.Counties.FirstOrDefault(x => x.COUNTY_ID == countyId);
+
+            if (County is null)
+            {
+                County = new County();
+                County.COUNTY_ID = 0;
+                County.COUNTY_NAME = "NOT FOUND";
+            }
+            
+            var year = 2019;
+
+            // In case it can't be found, won't be null
+            ViewBag.Population = "Unknown"; 
+            ViewBag.PopDensity = "Unknown";
+
+            //Utah Population chart
+            List<DataPoint> PopulationCounts = new List<DataPoint>();
+            string wwwPath = this._env.WebRootPath;
+            string[] PopulationPath = { wwwPath, "csv", "county_populations.csv" };
+            //Read the contents of CSV file.
+            var csvData = System.IO.File.ReadAllText(Path.Combine(PopulationPath));
+            //Loop to find correct county
+            int i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        if (cells[0].ToString().ToUpper() == County.COUNTY_NAME + " COUNTY")
+                        {
+                            ViewBag.Population = cells[1].ToString();
+                            ViewBag.PopDensity = cells[3].ToString();
+                        }
+
+                        PopulationCounts.Add(new DataPoint(cells[0].ToString(), Int32.Parse(cells[1].ToString())));
+                    }
+                }
+            }
+
+
+            ViewBag.PopulationCounts = JsonConvert.SerializeObject(PopulationCounts);
+
+            ViewBag.NumCrashes = repo.Crashes.Where(x => x.CRASH_DATETIME.Year == year).Count(x => x.CountyId == countyId);
+            ViewBag.NumFatal = repo.Crashes.Where(x => x.CountyId == countyId).Where(x => x.CRASH_DATETIME.Year == year).Count(x => x.SeverityId == 5);
+
+            if(ViewBag.Population == "Unknown")
+            {
+                ViewBag.CrashesCapita = "Unknown";
+                ViewBag.FatalCapita = "Unknown";
+            } else
+            {
+                ViewBag.CrashesCapita = Math.Round(ViewBag.NumCrashes * 100 / Double.Parse(ViewBag.Population), 4);
+                ViewBag.FatalCapita = Math.Round(ViewBag.NumFatal * 100 / Double.Parse(ViewBag.Population), 4);
+            }
+
+            // Crash Count per countyy
+            List<DataPoint> CountyCounts = new List<DataPoint>();
+            //Read the contents of CSV file.
+            string[] CountyPath = { wwwPath, "csv", "20_county_counts.csv" };
+            csvData = System.IO.File.ReadAllText(Path.Combine(CountyPath));
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        CountyCounts.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.CountyCounts = JsonConvert.SerializeObject(CountyCounts);
+
+
+            // Fatal Crash Count per countyy
+            List<DataPoint> FatalCountyCounts = new List<DataPoint>();
+            string[] FatalCountyPath = { wwwPath, "csv", "20_county_counts.csv" };
+            //Read the contents of CSV file.
+            csvData = System.IO.File.ReadAllText(Path.Combine(FatalCountyPath));
+            //Execute a loop over the rows.
+            i = 1;
+            foreach (string row in csvData.Split("\n"))
+            {
+                if (i == 1)
+                {
+                    i++;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var cells = row.Split(',');
+                        int count = Int32.Parse(cells[1]);
+                        FatalCountyCounts.Add(new DataPoint(cells[0], count));
+                    }
+                }
+
+            }
+            ViewBag.FatalCountyCounts = JsonConvert.SerializeObject(FatalCountyCounts);
+
+
+            return View(County);
+        }
     }
 }

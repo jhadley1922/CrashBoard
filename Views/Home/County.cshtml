@@ -1,0 +1,135 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["title"] = "County Details";
+}
+
+@section Head {
+    <script>
+        window.onload = function () {
+
+            var populationCountsChart = new CanvasJS.Chart("populationCountsContainer", {
+                animationEnabled: true,
+                theme: "light2", // "light1", "dark1", "dark2"
+                exportEnabled: true,
+                title: {
+                    text: "Utah Population"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints:  @Html.Raw(ViewBag.PopulationCounts),
+                }]
+            });
+            populationCountsChart.render();
+
+            var countyCountChart = new CanvasJS.Chart("countyCountsContainer", {
+                animationEnabled: true,
+                theme: "dark1", // "light1", "dark1", "dark2"
+                exportEnabled: true,
+                title: {
+                    text: "Crashes by County"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints:  @Html.Raw(ViewBag.CountyCounts),
+                }]
+            });
+            countyCountChart.render();
+
+            var fatalCountyCountChart = new CanvasJS.Chart("fatalCountyCountsContainer", {
+                animationEnabled: true,
+                theme: "dark2", // "light1", "dark1", "dark2"
+                exportEnabled: true,
+                title: {
+                    text: "Fatal Crashes by County"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints:  @Html.Raw(ViewBag.FatalCountyCounts),
+                }]
+            });
+            fatalCountyCountChart.render();
+        }
+    </script>
+}
+
+@model County
+
+<div class="container text-center">
+    <br />
+    <h1 class="text-capitalize h1">@Model.COUNTY_NAME COUNTY</h1>
+    <br />
+
+    <div class="row" style="height: 150px;">
+        <div class="col col-4">
+            <div class="card card-header">
+                <h2>2019 Crashes</h2>
+            </div>
+            <div class="card card-body">
+                <h3 class="text-warning">@ViewBag.NumCrashes</h3>
+            </div>
+        </div>
+        <div class="col col-4">
+            <div class="card card-header">
+                <h2>2019 Fatal Crashes</h2>
+            </div>
+            <div class="card card-body">
+                <h3 class="text-danger">@ViewBag.NumFatal</h3>
+            </div>
+        </div>
+        <div class="col col-4">
+            <div class="card card-header">
+                <h2>2022 Population</h2>
+            </div>
+            <div class="card card-body">
+                <h3 class="text-success">@ViewBag.Population</h3>
+            </div>
+        </div>
+    </div>
+    <br /> <br />
+    <div class="row" style="height: 200px;">
+        <div class="col col-4">
+            <div class="card card-header">
+                <h2>2019 Crashes per Capita</h2>
+            </div>
+            <div class="card card-body">
+                <h3 class="text-warning">@ViewBag.CrashesCapita%</h3>
+            </div>
+        </div>
+        <div class="col col-4">
+            <div class="card card-header">
+                <h2>2019 Fatal Crashes per Capita</h2>
+            </div>
+            <div class="card card-body">
+                <h3 class="text-danger">@ViewBag.FatalCapita%</h3>
+            </div>
+        </div>
+        <div class="col col-4">
+            <div class="card card-header">
+                <h2>2022 Population Density (mi&#178;)</h2>
+            </div>
+            <div class="card card-body">
+                <h3 class="text-primary">@ViewBag.PopDensity</h3>
+            </div>
+        </div>
+        <br />
+
+    </div>
+    <br />
+    <div class="row" style="height: 350px;">
+        <div id="populationCountsContainer" class="col col-12"></div>
+    </div>
+    <br /><br />
+    <div class="row" style="height: 350px;">
+        <div id="countyCountsContainer" class="col col-12"></div>
+    </div>
+    <br /><br />
+    <div class="row" style="height: 350px;">
+        <div id="fatalCountyCountsContainer" class="col col-12"></div>
+    </div>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+</div>
