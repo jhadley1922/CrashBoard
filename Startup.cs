@@ -45,10 +45,10 @@ namespace CrashBoard
             services.AddDbContext<CrashDbContext>(options =>
             {
                 // AWS production
-                if (Environment.GetEnvironmentVariable("RDS_HOST") != null)
+                if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
                 {
                     // production
-                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
                 }
                 else
                 {
@@ -62,10 +62,10 @@ namespace CrashBoard
             services.AddDbContext<AppIdentityDBContext>(options =>
             {
                 // AWS production
-                if (Environment.GetEnvironmentVariable("RDS_HOST") != null)
+                if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
                 {
                     // production
-                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_HOST")]);
+                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
                 }
                 else
                 {
