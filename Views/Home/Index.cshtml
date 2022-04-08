@@ -19,15 +19,40 @@
     </div>
 </header>
 
+<!-- About the website -->
+<section class="py-5" id="about">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 align-items-center">
+            <div class="text-center">
+                <h2 class="fw-bolder">About the CrashBoard</h2>
+                <div class="lead fw-normal text-muted mb-0">
+                    <p>
+                        The UDOT CrashBoard is a resource designed to educate drivers as well as provide insights to state officials.
+                        The <a asp-controller="Home" asp-action="Recommendations">Safety Tips</a> section suggests ways for drivers to
+                        better protect themselves and others on the road. The <a asp-controller="Inference" asp-action="SeverityPredictor">
+                        Crash Severity Predictor</a> allows both groups to predict the severity of a hypothetical crash.
+                        A <a asp-controller="Home" asp-action="CrashData">Crash Database</a> has been provided with recent crash data.
+                        Select officials will have the ability to log in and edit the data as needed. 
+                        The <a asp-controller="Home" asp-action="Analysis">Analysis</a> page provides insights into the data to aid 
+                        officials in finding solutions to help protect drivers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Issue Section -->
-<section class="py-5 bg-light" id="about">
+<section class="py-5 bg-light">
     <div class="container px-5 my-5">
         <div class="row gx-5 align-items-center">
             <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="~/img/Crash.jpeg" width="600" alt="UVX Crash" /></div>
             <div class="col-lg-6">
                 <h2 class="fw-bolder">Distracted Driving</h2>
-                <p class="lead fw-normal text-muted mb-0">Utah faces many challenges when it comes to motor vehicle accidents. Far too many accidents and deaths
-                occur each year due to these accidents. Action needs to be taken to increase awareness and minimuze these events.</p>
+                <p class="lead fw-normal text-muted mb-0">
+                    Utah faces many challenges when it comes to motor vehicle accidents. Far too many accidents and deaths
+                    occur each year due to these accidents. Action needs to be taken to increase awareness and minimuze these events.
+                </p>
             </div>
         </div>
     </div>
@@ -42,10 +67,11 @@
             </div>
             <div class="col-lg-6">
                 <h2 class="fw-bolder">Our Mission</h2>
-                <p class="lead fw-normal text-muted mb-0">Our team is striving to coordinate with the Utah Department of Transportation (UDOT) to 
-                find data-driven solutions for this issue. We have provided a database with information about many of the motor vehicle accidents 
-                during recent years. We have conducted detailed analytics and outlined possible solutions for lawmakers to implement to better 
-                protect Utahns.</p>
+                <p class="lead fw-normal text-muted mb-0">
+                    Our team is striving to coordinate with the Utah Department of Transportation (UDOT) to
+                    find data-driven solutions for this issue. We have provided a database with information about many of the motor vehicle accidents
+                    during recent years. We have conducted detailed analytics to help lawmakers protect Utahns.
+                </p>
             </div>
         </div>
     </div>
