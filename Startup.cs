@@ -48,7 +48,7 @@ namespace CrashBoard
                 if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
                 {
                     // production
-                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
+                    options.UseMySql(Environment.GetEnvironmentVariable("RDS_Connection"));
                 }
                 else
                 {
@@ -65,7 +65,7 @@ namespace CrashBoard
                 if (Environment.GetEnvironmentVariable("RDS_Connection") != null)
                 {
                     // production
-                    options.UseMySql(Configuration[Environment.GetEnvironmentVariable("RDS_Connection")]);
+                    options.UseMySql(Environment.GetEnvironmentVariable("RDS_Connection"));
                 }
                 else
                 {
