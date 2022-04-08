@@ -148,11 +148,10 @@ namespace CrashBoard.Controllers
             string wwwPath = this._env.WebRootPath;
             string contentPath = this._env.ContentRootPath;
 
-
             // Crash Count per countyy
             List<DataPoint> CountyCounts = new List<DataPoint>();
             //Read the contents of CSV file.
-            string[] CountyPath = { wwwPath, "csv", "20_County_Counts.csv" };
+            string[] CountyPath = { wwwPath, "csv", "20_county_counts.csv" };
             string csvData = System.IO.File.ReadAllText(Path.Combine(CountyPath));
             //Execute a loop over the rows.
             int i = 1;
@@ -178,7 +177,7 @@ namespace CrashBoard.Controllers
 
             // Fatal Crash Count per countyy
             List<DataPoint> FatalCountyCounts = new List<DataPoint>();
-            string[] FatalCountyPath = { wwwPath, "csv", "20_County_Counts.csv" };
+            string[] FatalCountyPath = { wwwPath, "csv", "20_county_counts.csv" };
             //Read the contents of CSV file.
             csvData = System.IO.File.ReadAllText(Path.Combine(FatalCountyPath));
             //Execute a loop over the rows.
